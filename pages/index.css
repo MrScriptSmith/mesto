@@ -1,0 +1,27 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+@import url(../blocks/link-clickable/link-clickable.css);
+@import url(../blocks/page/page.css);
+
+.header {
+  margin: auto;
+  padding: 45px 0 41px;
+  max-width: 880px;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+.header__logo {
+
+}
+.logo {
+}
+.header__line {
+  opacity: .7;
+  width: 100%;
+  object-fit: cover;
+  /* border: 1px solid #545454; */
+}
+
+/* * {
+  outline: 1px solid red;
+} */
