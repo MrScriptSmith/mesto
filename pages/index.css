@@ -10,18 +10,16 @@
   max-width: 880px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
-.header__logo {
 
-}
 .logo {
-}
-.header__line {
-  opacity: .7;
-  width: 100%;
-  object-fit: cover;
-  /* border: 1px solid #545454; */
+  display: block;
 }
 
-/* * {
+.content {
+  padding-top: 40px;
+  margin: auto;
+}
+
+* {
   outline: 1px solid red;
-} */
+}
