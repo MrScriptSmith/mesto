@@ -39,7 +39,7 @@
   "name button"
   "activity activity";
   align-content: center;
-  row-gap: 16px;
+  row-gap: 14px;
   column-gap: 18px;
 }
 
@@ -58,7 +58,7 @@
 
 .profile__button-edit {
   grid-area: button;
-  margin-top: auto;
+  margin-top: 20px;
   padding: 0;
   width: 24px;
   height: 24px;
@@ -101,13 +101,13 @@
   flex-wrap: wrap;
   row-gap: 20px;
   column-gap: 17px;
+  justify-content: center;
 }
 .cards__item {
   list-style-type: none;
   padding: 0;
   margin: 0;
-
-
+  border-radius: 10px;
 }
 
 .cards__content {
@@ -125,16 +125,9 @@
   border-radius: 10px 10px 0 0;
 
 }
-.cards__name {
-  display: flex;
-  align-items: center;
-  padding-left: 21px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.cards__name-form {
   box-sizing: border-box;
-  vertical-align: bottom;
-  width: 282px;
+  max-width: 282px;
   height: 79px;
   color: #000;
   font-weight: 900;
@@ -143,7 +136,32 @@
   background: no-repeat url(../images/Heart.svg) right 20px bottom 30px;
 }
 
+.cards__name {
+  padding-left: 21px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  line-height: 79px;
+  width: 70%;
+  vertical-align: middle;
+}
 
+.footer {
+  padding-top: 66px;
+  margin-bottom: 60px;
+  display: flex;
+  /* justify-content: start; */
+}
+
+.footer__copyright {
+  margin: 0;
+  padding: 0;
+  color: #545454;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+}
 
 * {
   outline: 1px solid red;
