@@ -259,11 +259,14 @@
   background: no-repeat url(../images/Heart.svg) center;
   opacity: 1;
   transition: opacity 0.3s ease;
-
 }
 
 .cards__name-form:hover::after {
   opacity: .5;
+}
+
+.cards__name-form_active::after {
+  background: no-repeat url(../images/Heart.svg) #000 center;
 }
 
 .cards__name {
@@ -281,7 +284,6 @@
   padding-top: 66px;
   margin-bottom: 60px;
   display: flex;
-  /* justify-content: start; */
 }
 
 @media (max-width: 880px) {
@@ -320,6 +322,9 @@
   background: rgba(0, 0, 0, .5)
 }
 
+.popup_opened {
+  display: flex;
+}
 
 .popup__container {
   width: 430px;
