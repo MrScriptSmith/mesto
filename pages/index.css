@@ -79,7 +79,7 @@
 @media (max-width: 880px) {
   .profile {
     flex-direction: column;
-    gap: 36px;
+    gap: 32px;
   }
 }
 
@@ -107,9 +107,13 @@
   column-gap: 18px;
 }
 
-@media (max-width: 880px){
+@media (max-width: 880px) {
   .profile__data {
     column-gap: 10px;
+    row-gap: 11px;
+    grid-template-areas:
+    ". name button"
+    ". activity .";
   }
 }
 
@@ -191,7 +195,7 @@
 
 @media (max-width: 880px) {
   .places {
-    padding-top: 36px;
+    padding-top: 34px;
   }
 }
 
@@ -205,6 +209,13 @@
   column-gap: 17px;
   justify-content: center;
 }
+
+@media (max-width: 880px) {
+  .cards {
+    row-gap: 17px;
+  }
+}
+
 .cards__item {
   list-style-type: none;
   padding: 0;
