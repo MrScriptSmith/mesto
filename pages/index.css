@@ -126,11 +126,16 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 1.14;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 293px;
 }
 
 @media (max-width: 880px){
   .profile__name {
     font-size: 27px;
+    max-width: 189px;
   }
 }
 
@@ -161,12 +166,17 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 335px;
 }
 
 @media (max-width: 880px){
   .profile__activity {
     text-align: center;
     font-size: 14px;
+    max-width: 189px;
   }
 }
 
