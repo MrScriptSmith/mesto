@@ -1,6 +1,45 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
-@import url(../blocks/link-clickable/link-clickable.css);
+@import url(../blocks/button-clickable/button-clickable.css);
+@import url(../blocks/root/root.css);
+@import url(../blocks/page/page.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/content/content.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__data/profile__data.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__button-edit/profile__button-edit.css);
+@import url(../blocks/profile/__activivty/profile__activity.css);
+@import url(../blocks/profile/__button-add/profile__button-add.css);
+@import url(../blocks/places/places.css);
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__item/cards__item.css);
+@import url(../blocks/cards/__content/cards__content.css);
+@import url(../blocks/cards/__img/cards__img.css);
+@import url(../blocks/cards/__name-form/cards__name-form.css);
+@import url(../blocks/cards/__name/cards__name.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__input-name/popup__input-name.css);
+@import url(../blocks/popup/__input-activity/popup__input-activity.css);
+@import url(../blocks/popup/__submit/popup__submit.css);
+
+.button-clickable {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.button-clickable:hover {
+  opacity: .6;
+}
+
 
 .root {
   width: 100%;
@@ -391,7 +430,7 @@
   }
 }
 
-.input__text_type_name {
+.popup__input-name {
   padding: 0;
   width: 358px;
   height: 27px;
@@ -404,16 +443,12 @@
 }
 
 @media (max-width: 600px) {
-  .input__text_type_name {
+  .popup__input-name {
     width: 238px;
   }
 }
 
-.input__text_type_name::placeholder {
-  color: #000;
-}
-
-.input__text_type_activity {
+.popup__input-activity {
   padding: 0;
   width: 358px;
   height: 27px;
@@ -427,14 +462,10 @@
 }
 
 @media (max-width: 600px) {
-  .input__text_type_activity {
+  .popup__input-activity {
     width: 238px;
     margin-bottom: 45px;
   }
-}
-
-.input__text_type_activity::placeholder {
-  color: #000;
 }
 
 .popup__submit {
@@ -465,14 +496,6 @@
   }
 }
 
-.button-clickable {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.button-clickable:hover {
-  opacity: .6;
-}
 
 
 * {

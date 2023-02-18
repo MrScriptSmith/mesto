@@ -1,8 +1,0 @@
-.link-clickable {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.link-clickable:hover {
-  opacity: .8;
-}
