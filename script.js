@@ -7,9 +7,6 @@ let profileName = document.querySelector(".profile__name");
 let profileActivity = document.querySelector(".profile__activity");
 let formElement = document.querySelector(".popup__container");
 let saveProfile = document.querySelector(".popup__submit");
-let cardsHeartActive = document.querySelectorAll(".cards__name");
-// let cardsHeart = document.querySelectorAll(".cards__name");
-// let cardsHeartTarget = window.getComputedStyle(cardsHeart, '::after');
 
 editButtonPopup.addEventListener("click", function () {
   userName.value = profileName.textContent;
@@ -27,34 +24,17 @@ saveProfile.addEventListener("click", function() {
   closePopup(editPopup);
 });
 
-// cardsHeartActive.addEventListener()
-
-// cardsHeart.addEventListener('click', function(event) {
-//   activeElement (event, cardsHeartTarget);
-// });
-
 
 formElement.addEventListener("submit", handleFormSubmit);
 
 function openPopup(popup) {
-  popup.classList.add("popup_opened");
+  popup.classList.add("popup__opened");
 }
 
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  popup.classList.remove('popup__opened');
 }
 
-// function cardsHeartActive(element) {
-//   element.classList.add('.cards__name-form_active');
-// }
-
-// function activeElement(event, pseudoElement) {
-//   if (event.target === pseudoElement) {
-//     pseudoElement.style.backgroundColor = 'black';
-//   } else {
-//     return;
-//   }
-// }
 
 function handleFormSubmit(event) {
   event.preventDefault();

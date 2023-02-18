@@ -1,4 +1,16 @@
 .page {
   max-width: 880px;
+  margin: auto;
+}
 
+@media (max-width: 918px) {
+  .page {
+    margin: 0 19px;
+  }
+}
+
+@media (max-width: 319px) {
+  .page {
+    margin: 0 5px;
+  }
 }
