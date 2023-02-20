@@ -3,9 +3,3 @@
   margin: auto;
   flex: auto;
 }
-
-@media (max-width: 880px){
-  .content {
-    padding-top: 40px;
-}
-}

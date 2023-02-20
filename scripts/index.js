@@ -5,7 +5,7 @@ let userName = document.querySelector(".popup__input_type_name");
 let userActivity = document.querySelector(".popup__input_type_activity");
 let profileName = document.querySelector(".profile__name");
 let profileActivity = document.querySelector(".profile__activity");
-let submitFormAndSave = document.querySelector(".popup__container");
+let submitFormAndSave = document.querySelector(".popup__form");
 
 
 editButtonPopup.addEventListener("click", function () {
