@@ -18,8 +18,11 @@
   <body class="root">
     <div class="page">
       <header class="header">
-        <a href="/"
-          ><img src="./images/Logo.svg" alt="Логотип" class="logo"
+        <a href="#"
+          ><img
+            src="./images/Logo.svg"
+            alt="Логотип"
+            class="logo button-clickable"
         /></a>
       </header>
       <main class="content">
@@ -32,21 +35,23 @@
             />
             <div class="profile__data">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button
-                class="profile__button-edit button-clickable"
-                aria-label="Редактировать"
-              ></button>
               <p class="profile__activity">Исследователь океана</p>
             </div>
+            <button
+              class="profile__button-edit button-clickable cursor-pointer"
+              aria-label="Редактировать"
+              type="button"
+            ></button>
           </div>
           <button
-            class="profile__button-add button-clickable"
+            class="profile__button-add button-clickable cursor-pointer"
             aria-label="Добавить"
+            type="button"
           ></button>
         </section>
         <section class="places">
-          <ul class="cards">
-            <li class="cards__item">
+          <ul class="places__cards">
+            <li class="cards">
               <img
                 src="./images/Bally.jpg"
                 alt="Храм Лемпуянг"
@@ -54,10 +59,14 @@
               />
               <div class="cards__name-form">
                 <h2 class="cards__name">Храм Лемпуянг</h2>
-                <div class="cards__heart"></div>
+                <button
+                  class="cards__heart cursor-pointer"
+                  aria-label="сердце"
+                  type="button"
+                ></button>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="cards">
               <img
                 src="./images/Budapest.jpg"
                 alt="Будапешт"
@@ -65,10 +74,14 @@
               />
               <div class="cards__name-form">
                 <h2 class="cards__name">Будапешт</h2>
-                <div class="cards__heart"></div>
+                <button
+                  class="cards__heart cursor-pointer"
+                  aria-label="сердце"
+                  type="button"
+                ></button>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="cards">
               <img
                 src="./images/Dubai.jpg"
                 alt="Бурдж-Халифа"
@@ -76,24 +89,36 @@
               />
               <div class="cards__name-form">
                 <h2 class="cards__name">Бурдж-Халифа</h2>
-                <div class="cards__heart"></div>
+                <button
+                  class="cards__heart cursor-pointer"
+                  aria-label="сердце"
+                  type="button"
+                ></button>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="cards">
               <img src="./images/Egypt.jpg" alt="Пирамиды" class="cards__img" />
               <div class="cards__name-form">
                 <h2 class="cards__name">Пирамиды</h2>
-                <div class="cards__heart"></div>
+                <button
+                  class="cards__heart cursor-pointer"
+                  aria-label="сердце"
+                  type="button"
+                ></button>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="cards">
               <img src="./images/Prague.jpg" alt="Прага" class="cards__img" />
               <div class="cards__name-form">
                 <h2 class="cards__name">Прага</h2>
-                <div class="cards__heart"></div>
+                <button
+                  class="cards__heart cursor-pointer"
+                  aria-label="сердце"
+                  type="button"
+                ></button>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="cards">
               <img
                 src="./images/Vietnam.jpg"
                 alt="Золотой мост в Дананге"
@@ -101,7 +126,11 @@
               />
               <div class="cards__name-form">
                 <h2 class="cards__name">Золотой мост в Дананге</h2>
-                <div class="cards__heart"></div>
+                <button
+                  class="cards__heart cursor-pointer"
+                  aria-label="сердце"
+                  type="button"
+                ></button>
               </div>
             </li>
           </ul>
@@ -110,22 +139,31 @@
       <footer class="footer">
         <p class="footer__copyright">&COPY; 2023. Антон Пасюк</p>
       </footer>
-      <section class="popup">
-        <form action="#" class="popup__container">
+      <div class="popup">
+        <form name="login_form" action="#" class="popup__container">
           <button
             aria-label="Закрыть"
-            class="popup__close button-clickable"
+            class="popup__close button-clickable cursor-pointer"
+            type="reset"
           ></button>
           <h2 class="popup__name">Редактировать профиль</h2>
-          <input type="text" placeholder="Имя" class="popup__input-name" />
           <input
+            name="username"
+            type="text"
+            placeholder="Имя"
+            class="popup__input popup__input_type_name"
+          />
+          <input
+            name="useractivity"
             type="text"
             placeholder="О себе"
-            class="popup__input-activity"
+            class="popup__input popup__input_type_activity"
           />
-          <button type="submit" class="popup__submit">Сохранить</button>
+          <button type="submit" class="popup__submit cursor-pointer">
+            Сохранить
+          </button>
         </form>
-      </section>
+      </div>
     </div>
   </body>
 </html>

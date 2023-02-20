@@ -5,6 +5,7 @@
   background: no-repeat url(../../../images/Heart.svg) center;
   opacity: 1;
   transition: opacity 0.3s ease;
+  border: none;
 }
 
 .cards__heart:hover {
