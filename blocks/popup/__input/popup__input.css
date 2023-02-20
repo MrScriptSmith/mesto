@@ -7,11 +7,11 @@
   line-height: 1.21;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
+  margin-bottom: 29px;
 }
 
 .popup__input:last-of-type {
-  margin-bottom: 50px;
+  margin-bottom: 51px;
 }
 
 @media (max-width: 600px) {
@@ -19,6 +19,6 @@
     width: 238px;
   }
   .popup__input:last-of-type {
-    margin-bottom: 45px;
+    margin-bottom: 49px;
   }
 }

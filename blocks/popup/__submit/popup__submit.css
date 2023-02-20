@@ -11,6 +11,7 @@
   height: 50px;
   box-sizing: border-box;
   transition: background-color 0.3s ease;
+  margin-bottom: 37px;
 }
 
 .popup__submit:hover {
@@ -22,5 +23,6 @@
     width: 238px;
     height: 46px;
     font-size: 14px;
+    margin-bottom: 25px;
   }
 }

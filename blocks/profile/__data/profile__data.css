@@ -1,13 +1,16 @@
 .profile__data {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-right: 20px;
+  display: grid;
+  grid-template-areas:
+  "name button"
+  "activity activity";
+  align-content: center;
+  row-gap: 8px;
+  column-gap: 19px;
+  grid-template-columns: max-content;
 }
 
 @media (max-width: 880px) {
   .profile__data {
-    margin: 0;
-    gap: 9px;
+    column-gap: 10px;
   }
 }
