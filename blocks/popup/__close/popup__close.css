@@ -5,7 +5,7 @@
   height: 32px;
   border: none;
   box-sizing: border-box;
-  background: no-repeat center url(../../../images/Close-Icon.svg);
+  background: no-repeat center/32px 32px url(../../../images/Close-Icon.svg);
   top: calc(50% - 165px - 8px - 32px);
   right: calc(50% - 215px - 8px - 32px);
 }
@@ -14,6 +14,7 @@
   .popup__close {
     width: 20px;
     height: 20px;
+    background-size: 20px 20px;
     top: calc(50% - 161px - 16px - 20px);
     right: calc(50% - 141px);
   }

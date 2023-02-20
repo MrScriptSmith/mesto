@@ -38,7 +38,7 @@
 
 **Ссылка на публикацию GitHub Pages**
 
-* [Ссылка на публикацию GitHub Pages](https://atadrakula.github.io/russian-travel/)
+* [Ссылка на публикацию GitHub Pages](https://atadrakula.github.io/mesto/)
 
 **Планы по доработке**
 
