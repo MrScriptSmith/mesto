@@ -1,19 +1,13 @@
 .profile__data {
-  display: grid;
-  grid-template-areas:
-  "name button"
-  "activity activity";
-  align-content: center;
-  row-gap: 14px;
-  column-gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-right: 20px;
 }
 
 @media (max-width: 880px) {
   .profile__data {
-    column-gap: 10px;
-    row-gap: 11px;
-    grid-template-areas:
-    ". name button"
-    ". activity .";
+    margin: 0;
+    gap: 9px;
   }
 }

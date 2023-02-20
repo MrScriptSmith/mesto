@@ -1,5 +1,5 @@
 .popup__name {
-  margin: 34px 0 47px 36px;
+  margin: 34px 0 45px 36px;
   color: #000;
   font-weight: 900;
   font-size: 24px;
@@ -8,7 +8,7 @@
 
 @media (max-width: 600px) {
   .popup__name {
-    margin: 25px 0 73px;
+    margin: 25px auto 73px;
     font-size: 18px;
   }
 }
