@@ -8,6 +8,7 @@
   white-space: nowrap;
   overflow: hidden;
   max-width: 335px;
+  text-align: center;
 }
 
 @media (max-width: 880px){
