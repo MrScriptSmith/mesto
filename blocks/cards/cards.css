@@ -4,6 +4,7 @@
   margin: 0;
   border-radius: 10px;
   box-sizing: border-box;
+  overflow: hidden;
   background: #ffffff;
   display: flex;
   flex-direction: column;

@@ -51,117 +51,85 @@
         </section>
         <section class="places">
           <ul class="places__cards">
-            <li class="cards">
-              <img
-                src="./images/Bally.jpg"
-                alt="Храм Лемпуянг"
-                class="cards__img"
-              />
-              <div class="cards__name-form">
-                <h2 class="cards__name">Храм Лемпуянг</h2>
-                <button
-                  class="cards__heart cursor-pointer"
-                  aria-label="сердце"
-                  type="button"
-                ></button>
-              </div>
-            </li>
-            <li class="cards">
-              <img
-                src="./images/Budapest.jpg"
-                alt="Будапешт"
-                class="cards__img"
-              />
-              <div class="cards__name-form">
-                <h2 class="cards__name">Будапешт</h2>
-                <button
-                  class="cards__heart cursor-pointer"
-                  aria-label="сердце"
-                  type="button"
-                ></button>
-              </div>
-            </li>
-            <li class="cards">
-              <img
-                src="./images/Dubai.jpg"
-                alt="Бурдж-Халифа"
-                class="cards__img"
-              />
-              <div class="cards__name-form">
-                <h2 class="cards__name">Бурдж-Халифа</h2>
-                <button
-                  class="cards__heart cursor-pointer"
-                  aria-label="сердце"
-                  type="button"
-                ></button>
-              </div>
-            </li>
-            <li class="cards">
-              <img src="./images/Egypt.jpg" alt="Пирамиды" class="cards__img" />
-              <div class="cards__name-form">
-                <h2 class="cards__name">Пирамиды</h2>
-                <button
-                  class="cards__heart cursor-pointer"
-                  aria-label="сердце"
-                  type="button"
-                ></button>
-              </div>
-            </li>
-            <li class="cards">
-              <img src="./images/Prague.jpg" alt="Прага" class="cards__img" />
-              <div class="cards__name-form">
-                <h2 class="cards__name">Прага</h2>
-                <button
-                  class="cards__heart cursor-pointer"
-                  aria-label="сердце"
-                  type="button"
-                ></button>
-              </div>
-            </li>
-            <li class="cards">
-              <img
-                src="./images/Vietnam.jpg"
-                alt="Золотой мост в Дананге"
-                class="cards__img"
-              />
-              <div class="cards__name-form">
-                <h2 class="cards__name">Золотой мост в Дананге</h2>
-                <button
-                  class="cards__heart cursor-pointer"
-                  aria-label="сердце"
-                  type="button"
-                ></button>
-              </div>
-            </li>
+            <template id="cards">
+              <li class="cards">
+                <img
+                  src=""
+                  alt=""
+                  class="cards__img"
+                />
+                <div class="cards__name-form">
+                  <h2 class="cards__name"></h2>
+                  <button
+                    class="cards__heart cursor-pointer"
+                    aria-label="сердце"
+                    type="button"
+                  ></button>
+                </div>
+              </li>
+            </template>
           </ul>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&COPY; 2023. Антон Пасюк</p>
       </footer>
-      <div class="popup">
+      <div class="popup" id="popup-edit">
         <div class="popup__container">
           <button
             aria-label="Закрыть"
             class="popup__close button-clickable cursor-pointer"
             type="button"
+            id="popup-edit-close"
           ></button>
           <h2 class="popup__name">Редактировать профиль</h2>
-          <form name="login_form" action="#" class="popup__form">
+          <form name="login_form" action="#" class="popup__form" id="popup-edit-form">
             <input
               name="username"
               type="text"
               placeholder="Имя"
               class="popup__input popup__input_type_name"
+              id="popup-edit-input-name"
             />
             <input
               name="useractivity"
               type="text"
               placeholder="О себе"
               class="popup__input popup__input_type_activity"
+              id="popup-edit-input-activity"
             />
             <button type="submit" class="popup__submit cursor-pointer">
               Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="popup" id="popup-add">
+        <div class="popup__container">
+          <button
+            aria-label="Закрыть"
+            class="popup__close button-clickable cursor-pointer"
+            type="button"
+            id="popup-add-close"
+          ></button>
+          <h2 class="popup__name">Новое место</h2>
+          <form name="card_form" action="#" class="popup__form" id="popup-add-form">
+            <input
+              name="cardname"
+              type="text"
+              placeholder="Название"
+              class="popup__input popup__input_type_card-name"
+              id="popup-add-input-card-name"
+            />
+            <input
+              name="cardlink"
+              type="text"
+              placeholder="Ссылка на картинку"
+              class="popup__input popup__input_type_card-link"
+              id="popup-add-input-card-link"
+            />
+            <button type="submit" class="popup__submit cursor-pointer">
+              Создать
             </button>
           </form>
         </div>
