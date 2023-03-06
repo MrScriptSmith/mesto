@@ -53,10 +53,11 @@
           <ul class="places__cards">
             <template id="cards">
               <li class="cards">
+                <button class="cards__trash cursor-pointer button-clickable" aria-label="мусорка" type="button"></button>
                 <img
                   src=""
                   alt=""
-                  class="cards__img"
+                  class="cards__img cursor-pointer"
                 />
                 <div class="cards__name-form">
                   <h2 class="cards__name"></h2>
@@ -123,7 +124,7 @@
             />
             <input
               name="cardlink"
-              type="text"
+              type="url"
               placeholder="Ссылка на картинку"
               class="popup__input popup__input_type_card-link"
               id="popup-add-input-card-link"
@@ -132,6 +133,17 @@
               Создать
             </button>
           </form>
+        </div>
+      </div>
+      <div class="popup-size">
+        <div class="popup-size__container">
+          <button
+              aria-label="Закрыть"
+              class="popup-size__close button-clickable cursor-pointer"
+              type="button"
+            ></button>
+            <img src="" alt="" class="popup-size__img"/>
+            <h3 class="popup-size__title"></h3>
         </div>
       </div>
     </div>
