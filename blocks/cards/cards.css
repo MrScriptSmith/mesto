@@ -5,8 +5,9 @@
   border-radius: 10px;
   box-sizing: border-box;
   overflow: hidden;
-  background: #ffffff;
+  background: #fff;
   display: flex;
   flex-direction: column;
   max-width: 282px;
+  position: relative;
 }

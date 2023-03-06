@@ -12,7 +12,3 @@
   opacity: 0.5;
 }
 
-.cards__heart:active {
-  background-image: url(../../../images/Heart_black.svg);
-  opacity: 1;
-}

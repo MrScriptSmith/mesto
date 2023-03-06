@@ -12,6 +12,6 @@
 @media (max-width: 600px) {
   .popup__container {
     min-width: 282px;
-    align-items: center;
+    align-items: none;
   }
 }
