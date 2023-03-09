@@ -55,7 +55,7 @@
               <li class="cards">
                 <button
                   class="cards__trash cursor-pointer button-clickable"
-                  aria-label="мусорка"
+                  aria-label="Мусорка"
                   type="button"
                 ></button>
                 <img src="#" alt="#" class="cards__img cursor-pointer" />
@@ -63,7 +63,7 @@
                   <h2 class="cards__name"></h2>
                   <button
                     class="cards__heart cursor-pointer"
-                    aria-label="сердце"
+                    aria-label="Сердце"
                     type="button"
                   ></button>
                 </div>
@@ -75,7 +75,7 @@
       <footer class="footer">
         <p class="footer__copyright">&COPY; 2023. Антон Пасюк</p>
       </footer>
-      <div class="popup" id="popup-edit">
+      <div class="popup edit-popup" id="popup-edit">
         <div class="popup__container">
           <button
             aria-label="Закрыть"
@@ -85,7 +85,7 @@
           ></button>
           <h2 class="popup__name">Редактировать профиль</h2>
           <form
-            name="login_form"
+            name="profile-form"
             action="#"
             class="popup__form"
             id="popup-edit-form"
@@ -110,7 +110,7 @@
           </form>
         </div>
       </div>
-      <div class="popup" id="popup-add">
+      <div class="popup add-popup" id="popup-add">
         <div class="popup__container">
           <button
             aria-label="Закрыть"
@@ -120,7 +120,7 @@
           ></button>
           <h2 class="popup__name">Новое место</h2>
           <form
-            name="card_form"
+            name="card-form"
             action="#"
             class="popup__form"
             id="popup-add-form"
@@ -145,15 +145,15 @@
           </form>
         </div>
       </div>
-      <div class="popup-size">
-        <div class="popup-size__container">
+      <div class="popup image-popup">
+        <div class="image-popup__container">
           <button
             aria-label="Закрыть"
-            class="popup-size__close button-clickable cursor-pointer"
+            class="popup__close image-popup__close button-clickable cursor-pointer"
             type="button"
           ></button>
-          <img src="#" alt="#" class="popup-size__img" />
-          <h3 class="popup-size__title"></h3>
+          <img src="#" alt="#" class="image-popup__img" />
+          <h3 class="image-popup__title"></h3>
         </div>
       </div>
     </div>
