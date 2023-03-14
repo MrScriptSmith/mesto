@@ -2,6 +2,7 @@
   margin: 0;
   width: 282px;
   height: 282px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   z-index: 1;
 }
