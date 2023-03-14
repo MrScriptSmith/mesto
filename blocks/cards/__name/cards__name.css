@@ -1,6 +1,7 @@
 .cards__name {
   padding-left: 21px;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   width: 70%;

@@ -4,6 +4,8 @@
   margin: auto;
   background: no-repeat url(../../../images/Heart.svg) center;
   opacity: 1;
+  -webkit-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
   border: none;
 }
@@ -11,4 +13,3 @@
 .cards__heart:hover {
   opacity: 0.5;
 }
-
