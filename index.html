@@ -14,6 +14,7 @@
     <link rel="icon" href="./images/favicon.ico" />
     <title>Место</title>
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validate.js" defer></script>
   </head>
   <body class="root">
     <div class="page">
@@ -90,21 +91,33 @@
             class="popup__form"
             id="popup-edit-form"
           >
-            <input
-              name="username"
-              type="text"
-              placeholder="Имя"
-              class="popup__input popup__input_type_name"
-              id="popup-edit-input-name"
-            />
-            <input
-              name="useractivity"
-              type="text"
-              placeholder="О себе"
-              class="popup__input popup__input_type_activity"
-              id="popup-edit-input-activity"
-            />
-            <button type="submit" class="popup__submit cursor-pointer">
+            <fieldset class="popup__fieldset">
+              <input
+                name="username"
+                type="text"
+                placeholder="Имя"
+                class="popup__input popup__input_type_username"
+                id="text-input"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="text-input-error popup__input-text-error"></span>
+            </fieldset>
+            <fieldset class="popup__fieldset">
+              <input
+                name="useractivity"
+                type="text"
+                placeholder="О себе"
+                class="popup__input popup__input_type_useractivity"
+                id="text-input"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="text-input-error popup__input-text-error"></span>
+            </fieldset>
+            <button type="submit" class="popup__submit popup__submit_active">
               Сохранить
             </button>
           </form>
@@ -125,21 +138,31 @@
             class="popup__form"
             id="popup-add-form"
           >
+          <fieldset class="popup__fieldset">
             <input
               name="cardname"
               type="text"
               placeholder="Название"
               class="popup__input popup__input_type_card-name"
-              id="popup-add-input-card-name"
+              id="text-input"
+              minlength="2"
+              maxlength="30"
+              required
             />
-            <input
-              name="cardlink"
-              type="url"
-              placeholder="Ссылка на картинку"
-              class="popup__input popup__input_type_card-link"
-              id="popup-add-input-card-link"
-            />
-            <button type="submit" class="popup__submit cursor-pointer">
+            <span class="text-input-error popup__input-text-error"></span>
+          </fieldset>
+            <fieldset class="popup__fieldset">
+              <input
+                name="cardlink"
+                type="url"
+                placeholder="Ссылка на картинку"
+                class="popup__input popup__input_type_card-link"
+                id="url-input"
+                required
+              />
+              <span class="url-input-error popup__input-text-error"></span>
+            </fieldset>
+            <button disabled type="submit" class="popup__submit popup__submit_inactive">
               Создать
             </button>
           </form>

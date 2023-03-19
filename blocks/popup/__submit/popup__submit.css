@@ -3,22 +3,11 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
-  background-color: rgba(0, 0, 0, 1);
-  border: none;
-  border-radius: 2px;
-  color: #fff;
   width: 358px;
   height: 50px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  -webkit-transition: background-color 0.3s ease;
-  -o-transition: background-color 0.3s ease;
-  transition: background-color 0.3s ease;
   margin-bottom: 37px;
-}
-
-.popup__submit:hover {
-  background-color: rgba(0, 0, 0, .8);
 }
 
 @media (max-width: 600px) {

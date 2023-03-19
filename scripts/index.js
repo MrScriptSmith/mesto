@@ -4,10 +4,10 @@ const imagePopup = document.querySelector('.image-popup');
 const buttonEditPopup = document.querySelector('.profile__button-edit');
 const pictImagePopup = imagePopup.querySelector('.image-popup__img');
 const titleImagePopup = imagePopup.querySelector('.image-popup__title');
-const userName = document.querySelector('#popup-edit-input-name');
-const userActivity = document.querySelector('#popup-edit-input-activity');
-const cardName = document.querySelector('#popup-add-input-card-name');
-const cardLink = document.querySelector('#popup-add-input-card-link');
+const userName = document.querySelector('.popup__input_type_username');
+const userActivity = document.querySelector('.popup__input_type_useractivity');
+const cardName = document.querySelector('.popup__input_type_card-name');
+const cardLink = document.querySelector('.popup__input_type_card-link');
 const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
 const profileForm = document.forms['profile-form'];
@@ -16,6 +16,7 @@ const cardsContainer = document.querySelector('.places__cards');
 const cardsTemplate = document.querySelector('#cards').content;
 const buttonAddPopup = document.querySelector('.profile__button-add');
 const closeButtons = document.querySelectorAll('.popup__close');
+const press = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 const initialCards = [
   {
@@ -77,13 +78,13 @@ function createCard(card) {
   nameOfTemplate.textContent = card.name;
   imageOfTemplate.alt = card.name;
   imageOfTemplate.src = card.link;
-  heartOfTemplate.addEventListener('click', (event) => {
+  heartOfTemplate.addEventListener(press, (event) => {
     if (event.target.classList.contains('cards__heart')) {
       event.target.classList.toggle('cards__heart_active');
     }
   });
-  trashOfTemplate.addEventListener('click', deleteCard);
-  imageOfTemplate.addEventListener('click', () => handleCardClick(imageOfTemplate));
+  trashOfTemplate.addEventListener(press, deleteCard);
+  imageOfTemplate.addEventListener(press, () => handleCardClick(imageOfTemplate));
   return cardTemplate;
 }
 
@@ -106,20 +107,20 @@ function deleteCard(event) {
   card.remove();
 }
 
-buttonEditPopup.addEventListener('click', () => {
+buttonEditPopup.addEventListener(press, () => {
   userName.value = profileName.textContent;
   userActivity.value = profileActivity.textContent;
   openPopup(editPopup);
 });
 
-buttonAddPopup.addEventListener('click', () => {
+buttonAddPopup.addEventListener(press, () => {
   openPopup(addPopup);
 });
 
 
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
+  button.addEventListener(press, () => closePopup(popup));
 });
 
 initialCards.forEach((card) => {
