@@ -97,12 +97,11 @@
                 type="text"
                 placeholder="Имя"
                 class="popup__input popup__input_type_username"
-                id="text-input"
                 minlength="2"
                 maxlength="40"
                 required
               />
-              <span class="text-input-error popup__input-text-error"></span>
+              <span class="popup__input-text-error popup__input-error_type_username"></span>
             </fieldset>
             <fieldset class="popup__fieldset">
               <input
@@ -110,12 +109,11 @@
                 type="text"
                 placeholder="О себе"
                 class="popup__input popup__input_type_useractivity"
-                id="text-input"
                 minlength="2"
                 maxlength="200"
                 required
               />
-              <span class="text-input-error popup__input-text-error"></span>
+              <span class="popup__input-text-error popup__input-error_type_useractivity"></span>
             </fieldset>
             <button type="submit" class="popup__submit popup__submit_active">
               Сохранить
@@ -140,29 +138,27 @@
           >
           <fieldset class="popup__fieldset">
             <input
-              name="cardname"
+              name="card-name"
               type="text"
               placeholder="Название"
               class="popup__input popup__input_type_card-name"
-              id="text-input"
               minlength="2"
               maxlength="30"
               required
             />
-            <span class="text-input-error popup__input-text-error"></span>
+            <span class="popup__input-text-error popup__input-error_type_card-name"></span>
           </fieldset>
             <fieldset class="popup__fieldset">
               <input
-                name="cardlink"
+                name="card-link"
                 type="url"
                 placeholder="Ссылка на картинку"
                 class="popup__input popup__input_type_card-link"
-                id="url-input"
                 required
               />
-              <span class="url-input-error popup__input-text-error"></span>
+              <span class="popup__input-text-error popup__input-error_type_card-link"></span>
             </fieldset>
-            <button disabled type="submit" class="popup__submit popup__submit_inactive">
+            <button disabled type="submit" class="popup__submit popup__submit_active">
               Создать
             </button>
           </form>
