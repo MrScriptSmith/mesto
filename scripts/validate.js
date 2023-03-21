@@ -53,23 +53,30 @@ const setEventListeners = (form, inputList, errorClass, visibleErrorClass, submi
   });
 }
 
-const enableValidation = (config) => {
-  const form = document.querySelector(config.formSelector);
+const initFormValidation = (form, config) => {
   const inputList = form.querySelectorAll(config.inputSelector);
   const submitButton = form.querySelector(config.submitButtonSelector);
 
   setEventListeners(form, inputList, config.errorClassTemplate, config.visibleErrorClass, submitButton, config.inactiveButtonClass);
+
 }
 
+const enableValidation = (config) => {
+  const forms = Array.from(document.querySelectorAll(config.formSelector));
+  forms.forEach((form) => {
+    initFormValidation(form, config);
+  });
+};
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  visibleErrorClass: 'popup__input-text-error_visible',
-  errorClassTemplate: '.popup__input-error_type_'
-});
+
+enableValidation(validationConfig);
+
+
+
+
+
+
+
 
 // const showInputError = (formElement, inputElement, errorMessage) => {
 //   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
