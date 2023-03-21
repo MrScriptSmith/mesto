@@ -1,10 +1,10 @@
-const showInputError = (errorTextElement, validationMessage, activeErrorClass) => {
+const showInputError = (errorTextElement, validationMessage, visibleErrorClass) => {
   errorTextElement.textContent = validationMessage;
-  errorTextElement.classList.add(activeErrorClass);
+  errorTextElement.classList.add(visibleErrorClass);
 }
 
-const hideInputError = (errorTextElement, activeErrorClass) => {
-  errorTextElement.classList.remove(activeErrorClass);
+const hideInputError = (errorTextElement, visibleErrorClass) => {
+  errorTextElement.classList.remove(visibleErrorClass);
   errorTextElement.textContent = '';
 }
 
@@ -18,10 +18,10 @@ const enableButton = (submitButton, inactiveButtonClass) => {
   submitButton.disabled = false;
 }
 
-const checkInputValidity = (input, errorClass, activeErrorClass) => {
+const checkInputValidity = (input, errorClass, visibleErrorClass) => {
   const errorTextElement = document.querySelector(`${errorClass}${input.name}`);
   if (!input.validity.valid) {
-    showInputError(errorTextElement, input.validationMessage, activeErrorClass);
+    showInputError(errorTextElement, input.validationMessage, visibleErrorClass);
   } else {
     hideInputError(errorTextElement);
   }
@@ -35,7 +35,7 @@ const toggleButtonState = (submitButton, inactiveButtonClass) => {
   }
 }
 
-const setEventListeners = (form, inputList, errorClass, activeErrorClass, submitButton, inactiveButtonClass) => {
+const setEventListeners = (form, inputList, errorClass, visibleErrorClass, submitButton, inactiveButtonClass) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -43,7 +43,7 @@ const setEventListeners = (form, inputList, errorClass, activeErrorClass, submit
 
   inputList.forEach((input) => {
     input.addEventListener('input', () => {
-      checkInputValidity(input, errorClass, activeErrorClass);
+      checkInputValidity(input, errorClass, visibleErrorClass);
       toggleButtonState(submitButton, inactiveButtonClass);
     });
   });
@@ -54,7 +54,7 @@ const enableValidation = (config) => {
   const inputList = form.querySelectorAll(config.inputSelector);
   const submitButton = form.querySelector(config.submitButtonSelector);
 
-  setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, submitButton, config.inactiveButtonClass);
+  setEventListeners(form, inputList, config.errorClassTemplate, config.visibleErrorClass, submitButton, config.inactiveButtonClass);
 }
 
 
@@ -63,7 +63,7 @@ enableValidation({
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_inactive',
-  activeErrorClass: 'popup__input-text-error_active',
+  visibleErrorClass: 'popup__input-text-error_visible',
   errorClassTemplate: '.popup__input-error_type_'
 });
 
