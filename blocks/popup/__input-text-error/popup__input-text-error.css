@@ -1,10 +1,25 @@
 .popup__input-text-error {
-  display: none;
+  visibility: hidden;
   color: #F00;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.25;
   padding-top: 5px;
-  max-width: 100%;
+  width: 358px;
   min-height: 15px;
 }
+
+.popup__input-text-error:last-of-type {
+  margin-bottom: 30px;
+}
+
+
+@media (max-width: 600px) {
+  .popup__input-text-error {
+    width: 238px;
+  }
+  .popup__input-text-error:last-of-type {
+    margin-bottom: 25px;
+  }
+}
+

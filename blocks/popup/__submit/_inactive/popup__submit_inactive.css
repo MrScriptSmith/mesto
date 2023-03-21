@@ -4,4 +4,11 @@
   border-radius: 2px;
   background-color: transparent;
   opacity: .2;
+  cursor: not-allowed;
+  transition: none;
 }
+
+.popup__submit_inactive:hover {
+  background-color: transparent;
+}
+
