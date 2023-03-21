@@ -65,7 +65,7 @@ const enableValidation = (config) => {
   const inputList = form.querySelectorAll(config.inputSelector);
   const submitButton = form.querySelector(config.submitButtonSelector);
 
-  setEventListeners(form, inputList, config.errorClassTemplate, config.visibleErrorClass, config.inactiveButtonClass, submitButton);
+  setEventListeners(form, inputList, config.errorClassTemplate, config.visibleErrorClass, submitButton, config.inactiveButtonClass);
 }
 
 
