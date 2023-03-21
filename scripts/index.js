@@ -12,6 +12,7 @@ const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
 const profileForm = document.forms['profile-form'];
 const cardForm = document.forms['card-form'];
+const submitCardForm = cardForm.querySelector('.popup__submit'); // если будет использоваться 1 раз перенести в функцию открытия попап
 const cardsContainer = document.querySelector('.places__cards');
 const cardsTemplate = document.querySelector('#cards').content;
 const buttonAddPopup = document.querySelector('.profile__button-add');
@@ -47,6 +48,7 @@ const initialCards = [
 
 function openPopup(popup) {
   popup.classList.add('popup_visible');
+  closeForEsc(popup);
 }
 
 function closePopup(popup) {
@@ -98,13 +100,25 @@ function saveFormAdd(event) {
     cardsContainer.prepend(createCard(cardObject));
     closePopup(addPopup);
     cardForm.reset();
+    disableButton(submitCardForm, validationConfig.inactiveButtonClass);
   }
 }
+
 
 function deleteCard(event) {
   event.preventDefault();
   const card = event.target.closest('.cards');
   card.remove();
+}
+
+function closeForEsc(popup) {
+  const handleEscClose = (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+      document.removeEventListener('keydown', handleEscClose);
+    }
+  };
+  document.addEventListener('keydown', handleEscClose);
 }
 
 buttonEditPopup.addEventListener(press, () => {
@@ -118,9 +132,19 @@ buttonAddPopup.addEventListener(press, () => {
 });
 
 
+function initClosePopup(button, popup) {
+  const handleClick = (evt) => {
+    if (evt.target === popup || evt.target === button) {
+      closePopup(popup);
+    }
+  };
+  button.addEventListener(press, () => closePopup(popup));
+  popup.addEventListener(press, handleClick);
+}
+
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
-  button.addEventListener(press, () => closePopup(popup));
+  initClosePopup(button, popup);
 });
 
 initialCards.forEach((card) => {

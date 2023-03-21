@@ -6,20 +6,13 @@
   line-height: 1.25;
   padding-top: 5px;
   width: 358px;
-  min-height: 15px;
+  min-height: 30px;
 }
-
-.popup__input-text-error:last-of-type {
-  margin-bottom: 30px;
-}
-
 
 @media (max-width: 600px) {
   .popup__input-text-error {
     width: 238px;
   }
-  .popup__input-text-error:last-of-type {
-    margin-bottom: 25px;
-  }
+
 }
 

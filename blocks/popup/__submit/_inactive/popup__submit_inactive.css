@@ -4,7 +4,7 @@
   border-radius: 2px;
   background-color: transparent;
   opacity: .2;
-  cursor: not-allowed;
+  cursor: default;
   transition: none;
 }
 
