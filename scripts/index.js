@@ -18,6 +18,7 @@ const cardsTemplate = document.querySelector('#cards').content;
 const buttonAddPopup = document.querySelector('.profile__button-add');
 const closeButtons = document.querySelectorAll('.popup__close');
 const press = 'ontouchstart' in window ? 'touchstart' : 'click';
+const pressOrMouseDown = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
 
 const initialCards = [
   {
@@ -104,7 +105,6 @@ function saveFormAdd(event) {
   }
 }
 
-
 function deleteCard(event) {
   event.preventDefault();
   const card = event.target.closest('.cards');
@@ -131,7 +131,6 @@ buttonAddPopup.addEventListener(press, () => {
   openPopup(addPopup);
 });
 
-
 function initClosePopup(button, popup) {
   const handleClick = (evt) => {
     if (evt.target === popup || evt.target === button) {
@@ -139,7 +138,7 @@ function initClosePopup(button, popup) {
     }
   };
   button.addEventListener(press, () => closePopup(popup));
-  popup.addEventListener(press, handleClick);
+  popup.addEventListener(pressOrMouseDown, handleClick);
 }
 
 closeButtons.forEach((button) => {
