@@ -4,5 +4,5 @@ const validationConfig = {
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_inactive',
   visibleErrorClass: 'popup__input-text-error_visible',
-  errorClassTemplate: '.popup__input-error_type_'
+  errorClassTemplate: '.popup__input-text-error_type_'
 };
