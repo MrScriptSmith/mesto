@@ -91,27 +91,31 @@
             class="popup__form"
             id="popup-edit-form"
           >
-            <input
-              name="username"
-              type="text"
-              placeholder="Имя"
-              class="popup__input popup__input_type_username"
-              minlength="2"
-              maxlength="40"
-              required
-            />
-            <span class="popup__input-text-error popup__input-error_type_username"></span>
-            <input
-              name="useractivity"
-              type="text"
-              placeholder="О себе"
-              class="popup__input popup__input_type_useractivity"
-              minlength="2"
-              maxlength="200"
-              required
-            />
-            <span class="popup__input-text-error popup__input-error_type_useractivity"></span>
-            <button type="submit" class="popup__submit">
+            <fieldset class="popup__fieldset">
+              <input
+                name="username"
+                type="text"
+                placeholder="Имя"
+                class="popup__input popup__input_type_username"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="popup__input-text-error popup__input-error_type_username"></span>
+            </fieldset>
+            <fieldset class="popup__fieldset">
+              <input
+                name="useractivity"
+                type="text"
+                placeholder="О себе"
+                class="popup__input popup__input_type_useractivity"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="popup__input-text-error popup__input-error_type_useractivity"></span>
+            </fieldset>
+            <button type="submit" class="popup__submit popup__submit_active">
               Сохранить
             </button>
           </form>
@@ -132,6 +136,7 @@
             class="popup__form"
             id="popup-add-form"
           >
+          <fieldset class="popup__fieldset">
             <input
               name="card-name"
               type="text"
@@ -142,15 +147,18 @@
               required
             />
             <span class="popup__input-text-error popup__input-error_type_card-name"></span>
-            <input
-              name="card-link"
-              type="url"
-              placeholder="Ссылка на картинку"
-              class="popup__input popup__input_type_card-link"
-              required
-            />
-            <span class="popup__input-text-error popup__input-error_type_card-link"></span>
-            <button disabled type="submit" class="popup__submit">
+          </fieldset>
+            <fieldset class="popup__fieldset">
+              <input
+                name="card-link"
+                type="url"
+                placeholder="Ссылка на картинку"
+                class="popup__input popup__input_type_card-link"
+                required
+              />
+              <span class="popup__input-text-error popup__input-error_type_card-link"></span>
+            </fieldset>
+            <button disabled type="submit" class="popup__submit popup__submit_active">
               Создать
             </button>
           </form>

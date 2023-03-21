@@ -1,10 +1,10 @@
-const showInputError = (errorTextElement, validationMessage, visibleErrorClass) => {
+const showInputError = (errorTextElement, validationMessage, activeErrorClass) => {
   errorTextElement.textContent = validationMessage;
-  errorTextElement.classList.add(visibleErrorClass);
+  errorTextElement.classList.add(activeErrorClass);
 }
 
-const hideInputError = (errorTextElement, visibleErrorClass) => {
-  errorTextElement.classList.remove(visibleErrorClass);
+const hideInputError = (errorTextElement, activeErrorClass) => {
+  errorTextElement.classList.remove(activeErrorClass);
   errorTextElement.textContent = '';
 }
 
@@ -18,10 +18,10 @@ const enableButton = (submitButton, inactiveButtonClass) => {
   submitButton.disabled = false;
 }
 
-const checkInputValidity = (input, errorClass, visibleErrorClass) => {
+const checkInputValidity = (input, errorClass, activeErrorClass) => {
   const errorTextElement = document.querySelector(`${errorClass}${input.name}`);
   if (!input.validity.valid) {
-    showInputError(errorTextElement, input.validationMessage, visibleErrorClass);
+    showInputError(errorTextElement, input.validationMessage, activeErrorClass);
   } else {
     hideInputError(errorTextElement);
   }
@@ -39,7 +39,7 @@ const toggleButtonState = (submitButton, inactiveButtonClass, inputList) => {
   }
 }
 
-const setEventListeners = (form, inputList, errorClass, visibleErrorClass, submitButton, inactiveButtonClass) => {
+const setEventListeners = (form, inputList, errorClass, activeErrorClass, submitButton, inactiveButtonClass) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -47,8 +47,8 @@ const setEventListeners = (form, inputList, errorClass, visibleErrorClass, submi
 
   inputList.forEach((input) => {
     input.addEventListener('input', () => {
-      checkInputValidity(input, errorClass, visibleErrorClass);
-      toggleButtonState(submitButton, inactiveButtonClass, inputList);
+      checkInputValidity(input, errorClass, activeErrorClass);
+      toggleButtonState(submitButton, inactiveButtonClass);
     });
   });
 }
@@ -65,7 +65,7 @@ const enableValidation = (config) => {
   const inputList = form.querySelectorAll(config.inputSelector);
   const submitButton = form.querySelector(config.submitButtonSelector);
 
-  setEventListeners(form, inputList, config.errorClassTemplate, config.visibleErrorClass, submitButton, config.inactiveButtonClass);
+  setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, submitButton, config.inactiveButtonClass);
 }
 
 
@@ -74,7 +74,7 @@ enableValidation({
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_inactive',
-  visibleErrorClass: 'popup__input-text-error_visible',
+  activeErrorClass: 'popup__input-text-error_active',
   errorClassTemplate: '.popup__input-error_type_'
 });
 
