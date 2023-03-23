@@ -11,6 +11,7 @@ const hideInputError = (errorTextElement, visibleErrorClass) => {
 const disableButton = (submitButton, inactiveButtonClass) => {
   submitButton.classList.add(inactiveButtonClass);
   submitButton.disabled = true;
+
 }
 
 const enableButton = (submitButton, inactiveButtonClass) => {
@@ -44,6 +45,11 @@ const setEventListeners = (form, inputList, errorClass, visibleErrorClass, submi
     evt.preventDefault();
 
   });
+
+  form.addEventListener('reset', () => {
+    disableButton(submitButton, inactiveButtonClass);
+  });
+
   inputList.forEach((input) => {
     input.addEventListener('input', () => {
       checkInputValidity(input, errorClass, visibleErrorClass);
