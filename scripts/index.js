@@ -49,11 +49,13 @@ const initialCards = [
 
 function openPopup(popup) {
   popup.classList.add('popup_visible');
-  closeForEsc(popup);
+  document.addEventListener('keydown', closeByEscape);
+
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_visible');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function handleProfileFormSubmit(event) {
@@ -82,9 +84,7 @@ function createCard(card) {
   imageOfTemplate.alt = card.name;
   imageOfTemplate.src = card.link;
   heartOfTemplate.addEventListener(press, (event) => {
-    if (event.target.classList.contains('cards__heart')) {
       event.target.classList.toggle('cards__heart_active');
-    }
   });
   trashOfTemplate.addEventListener(press, deleteCard);
   imageOfTemplate.addEventListener(press, () => handleCardClick(imageOfTemplate));
@@ -101,7 +101,6 @@ function saveFormAdd(event) {
     cardsContainer.prepend(createCard(cardObject));
     closePopup(addPopup);
     cardForm.reset();
-    disableButton(submitCardForm, validationConfig.inactiveButtonClass);
   }
 }
 
@@ -111,15 +110,12 @@ function deleteCard(event) {
   card.remove();
 }
 
-function closeForEsc(popup) {
-  const handleEscClose = (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-      document.removeEventListener('keydown', handleEscClose);
-    }
-  };
-  document.addEventListener('keydown', handleEscClose);
-}
+const closeByEscape = (evt) => {
+  if (evt.key === 'Escape') {
+    const visiblePopup = document.querySelector('.popup_visible');
+    closePopup(visiblePopup);
+  }
+};
 
 buttonEditPopup.addEventListener(press, () => {
   userName.value = profileName.textContent;
@@ -137,7 +133,6 @@ function initClosePopup(button, popup) {
       closePopup(popup);
     }
   };
-  button.addEventListener(press, () => closePopup(popup));
   popup.addEventListener(pressOrMouseDown, handleClick);
 }
 
