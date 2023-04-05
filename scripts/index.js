@@ -1,61 +1,42 @@
-const editPopup = document.querySelector('#popup-edit');
-const addPopup = document.querySelector('#popup-add');
-const imagePopup = document.querySelector('.image-popup'); //-
-const buttonEditPopup = document.querySelector('.profile__button-edit');
-const pictImagePopup = imagePopup.querySelector('.image-popup__img'); //-
-const titleImagePopup = imagePopup.querySelector('.image-popup__title'); //-
-const userName = document.querySelector('.popup__input_type_username');
-const userActivity = document.querySelector('.popup__input_type_useractivity');
-const cardName = document.querySelector('.popup__input_type_card-name');
-const cardLink = document.querySelector('.popup__input_type_card-link');
-const profileName = document.querySelector('.profile__name');
-const profileActivity = document.querySelector('.profile__activity');
-const profileForm = document.forms['profile-form'];
-const cardForm = document.forms['card-form'];
-const submitCardForm = cardForm.querySelector('.popup__submit'); // если будет использоваться 1 раз перенести в функцию открытия попап
-const cardsContainer = document.querySelector('.places__cards');
-const cardsTemplate = document.querySelector('#cardTemplate').content; //-
-const buttonAddPopup = document.querySelector('.profile__button-add');
-const closeButtons = document.querySelectorAll('.popup__close');
-const press = 'ontouchstart' in window ? 'touchstart' : 'click'; //-
-const pressOrMouseDown = 'ontouchstart' in window ? 'touchstart' : 'mousedown'; //-
+import {
+  press,
+  initialCards,
+  editPopup,
+  addPopup,
+  buttonEditPopup,
+  userName,
+  userActivity,
+  cardName,
+  cardLink,
+  profileName,
+  profileActivity,
+  profileForm,
+  buttonAddPopup,
+  closeButtons,
+  cardsContainer,
+  pressOrMouseDown
+} from './constants.js';
 
-const initialCards = [
-  {
-    name: 'Храм Лемпуянг',
-    link: './images/Bally.jpg',
-  },
-  {
-    name: 'Будапешт',
-    link: './images/Budapest.jpg',
-  },
-  {
-    name: 'Бурдж-Халифа',
-    link: './images/Dubai.jpg',
-  },
-  {
-    name: 'Пирамиды',
-    link: './images/Egypt.jpg',
-  },
-  {
-    name: 'Прага',
-    link: './images/Prague.jpg',
-  },
-  {
-    name: 'Золотой мост в Дананге',
-    link: './images/Vietnam.jpg',
-  },
-];
+import Card from './card.js';
 
-function openPopup(popup) { //-
-  popup.classList.add('popup_visible'); //-
-  document.addEventListener('keydown', closeByEscape);
-
+function createCard(card) {
+  const newCard = new Card(card, "#cardTemplate");
+  return newCard.generateCard();
 }
 
-function closePopup(popup) { //-
-  popup.classList.remove('popup_visible'); //-
-  document.removeEventListener('keydown', closeByEscape);
+initialCards.forEach((card) => {
+  cardsContainer.append(createCard(card));
+})
+
+
+function openPopup(popup) {
+  popup.classList.add('popup_visible');
+  document.addEventListener('keydown', closeByEscape);
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_visible');
+  document.removeEventListener('keydown', closeByEscape); // добавить в класс?
 }
 
 function handleProfileFormSubmit(event) {
@@ -65,30 +46,6 @@ function handleProfileFormSubmit(event) {
   profileName.textContent = nameInput;
   profileActivity.textContent = jobInput;
   closePopup(editPopup);
-}
-
-function handleCardClick(card) { //-
-  titleImagePopup.textContent = card.alt; //-
-  pictImagePopup.src = card.src; //-
-  pictImagePopup.alt = card.alt; //-
-  openPopup(imagePopup); //-
-}
-
-function createCard(card) {
-  const cardTemplate = cardsTemplate.querySelector('.cards').cloneNode(true); //-
-  const nameOfTemplate = cardTemplate.querySelector('.cards__name'); //-
-  const imageOfTemplate = cardTemplate.querySelector('.cards__img'); //-
-  const heartOfTemplate = cardTemplate.querySelector('.cards__heart'); //-
-  const trashOfTemplate = cardTemplate.querySelector('.cards__trash'); //-
-  nameOfTemplate.textContent = card.name; //-
-  imageOfTemplate.alt = card.name; //-
-  imageOfTemplate.src = card.link; //-
-  heartOfTemplate.addEventListener(press, (event) => { //-
-      event.target.classList.toggle('cards__heart_active'); //-
-  }); //-
-  trashOfTemplate.addEventListener(press, deleteCard); //-
-  imageOfTemplate.addEventListener(press, () => handleCardClick(imageOfTemplate));
-  return cardTemplate;
 }
 
 function saveFormAdd(event) {
@@ -102,12 +59,6 @@ function saveFormAdd(event) {
     closePopup(addPopup);
     cardForm.reset();
   }
-}
-
-function deleteCard(event) {
-  event.preventDefault();
-  const card = event.target.closest('.cards');
-  card.remove();
 }
 
 const closeByEscape = (evt) => {
@@ -141,9 +92,7 @@ closeButtons.forEach((button) => {
   initClosePopup(button, popup);
 });
 
-initialCards.forEach((card) => {
-  cardsContainer.append(createCard(card));
-});
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 cardForm.addEventListener('submit', saveFormAdd);
+
