@@ -87,4 +87,4 @@ export {
   closeButtons,
   cardsContainer,
   pressOrMouseDown,
-}
+};
