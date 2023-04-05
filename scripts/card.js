@@ -1,11 +1,6 @@
-const imagePopup = document.querySelector('.image-popup');
-const pictImagePopup = imagePopup.querySelector('.image-popup__img');
-const titleImagePopup = imagePopup.querySelector('.image-popup__title');
-const cardsContainer = document.querySelector('.places__cards');
-const press = 'ontouchstart' in window ? 'touchstart' : 'click';
-const pressOrMouseDown = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
+import { imagePopup, pictImagePopup, titleImagePopup, press } from './constants.js';
 
-class Card {
+export default class Card {
   constructor(card, setTemplateSelector) {
     this._setTemplateSelector = setTemplateSelector;
     this._name = card.name;
@@ -23,7 +18,7 @@ class Card {
   }
 
   generateCard() {
-    this._elementCard = _getCardTemplate();
+    this._elementCard = this._getCardTemplate();
     this._elementCard.querySelector('.cards__name').textContent = this._name;
     this._cardPicture = this._elementCard.querySelector('.cards__img');
     this._cardPicture.src = this._link;
@@ -42,16 +37,6 @@ class Card {
     pictImagePopup.alt = this._name;
 
     imagePopup.classList.add('popup_visible');
-
-  }
-
-  _handleCardClose() {
-    imagePopup.classList.remove('popup_visible');
-
-    titleImagePopup.textContent = '';
-    pictImagePopup.src = '';
-    pictImagePopup.alt = '';
-
   }
 
   _handleCardLike() {
@@ -64,23 +49,15 @@ class Card {
 
   _setEventListeners() {
     this._cardLikeButton.addEventListener(press, () => {
-      this._handleCardLike;
+      this._handleCardLike();
     })
 
     this._cardTrashButton.addEventListener(press, () => {
-      this._handleCardTrash;
+      this._handleCardTrash();
     })
 
     this._cardPicture.addEventListener(press, () => {
-      this._handleCardClick;
+      this._handleCardClick();
     })
   }
 }
-
-initialCards.forEach((card) => {
-  const card = new Card(card, '#cardTemplate');
-  const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
-})
-
-// const cardItem = new Card(initialCards, '#cardTemplate', handleCardClick);
