@@ -5,6 +5,7 @@ export default class Card {
     this._setTemplateSelector = setTemplateSelector;
     this._name = card.name;
     this._link = card.link;
+    this._handleByEscapeBound = this._handleByEscape.bind(this);
   }
 
   _getCardTemplate() {
@@ -25,11 +26,26 @@ export default class Card {
     this._cardPicture.alt = this._name;
     this._cardLikeButton = this._elementCard.querySelector('.cards__heart');
     this._cardTrashButton = this._elementCard.querySelector('.cards__trash');
+    this._cardCloseButton = imagePopup.querySelector('.popup__close');
 
     this._setEventListeners();
 
     return this._elementCard;
   }
+
+  _handleByEscape(evt) {
+    if (evt.key === 'Escape') {
+      this._handleCardClose();
+    }
+  };
+
+  _handleCardClose() {
+    imagePopup.classList.remove('popup_visible');
+
+    titleImagePopup.textContent = '';
+    pictImagePopup.src = '';
+    pictImagePopup.alt = '';
+  };
 
   _handleCardClick() {
     titleImagePopup.textContent = this._name;
@@ -58,6 +74,12 @@ export default class Card {
 
     this._cardPicture.addEventListener(press, () => {
       this._handleCardClick();
+      document.addEventListener('keydown', this._handleByEscapeBound);
+    })
+
+    this._cardCloseButton.addEventListener(press, () => {
+      this._handleCardClose();
+      document.removeEventListener('keydown', this._handleByEscapeBound);
     })
   }
 }

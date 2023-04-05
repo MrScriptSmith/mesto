@@ -16,6 +16,7 @@ const validationConfig = {
   visibleErrorClass: 'popup__input-text-error_visible',
   errorClassTemplate: '.popup__input-text-error_type_'
 };
+const forms = Array.from(document.forms);
 
 //Константы для модуля  index.js
 const initialCards = [
@@ -69,6 +70,7 @@ export {
   titleImagePopup,
   press,
   validationConfig,
+  forms,
   initialCards,
   editPopup,
   addPopup,
@@ -80,8 +82,9 @@ export {
   profileName,
   profileActivity,
   profileForm,
+  cardForm,
   buttonAddPopup,
   closeButtons,
   cardsContainer,
-  pressOrMouseDown
+  pressOrMouseDown,
 }

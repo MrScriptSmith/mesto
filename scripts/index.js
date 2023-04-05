@@ -1,6 +1,8 @@
 import {
   press,
   initialCards,
+  validationConfig,
+  forms,
   editPopup,
   addPopup,
   buttonEditPopup,
@@ -11,13 +13,15 @@ import {
   profileName,
   profileActivity,
   profileForm,
+  cardForm,
   buttonAddPopup,
   closeButtons,
   cardsContainer,
   pressOrMouseDown
 } from './constants.js';
 
-import Card from './card.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 function createCard(card) {
   const newCard = new Card(card, "#cardTemplate");
@@ -29,6 +33,11 @@ initialCards.forEach((card) => {
 })
 
 
+forms.forEach((form) => {
+  const formValidator = new FormValidator(validationConfig, form);
+  formValidator.enableValidation();
+});
+
 function openPopup(popup) {
   popup.classList.add('popup_visible');
   document.addEventListener('keydown', closeByEscape);
@@ -36,7 +45,7 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_visible');
-  document.removeEventListener('keydown', closeByEscape); // добавить в класс?
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function handleProfileFormSubmit(event) {
