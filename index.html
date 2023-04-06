@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="./pages/index.css" />
     <link rel="icon" href="./images/favicon.ico" />
     <title>Место</title>
-    <script src="./scripts/constants.js" defer></script>
-    <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validate.js" defer></script>
+    <script type="module" src="./scripts/constants.js" defer></script>
+    <script type="module" src="./scripts/Card.js" defer></script>
+    <script type="module" src="./scripts/FormValidator.js" defer></script>
+    <script type="module" src="./scripts/index.js" defer></script>
   </head>
   <body class="root">
     <div class="page">
@@ -53,7 +54,7 @@
         </section>
         <section class="places">
           <ul class="places__cards">
-            <template id="cards">
+            <template id="cardTemplate">
               <li class="cards">
                 <button
                   class="cards__trash cursor-pointer button-clickable"
