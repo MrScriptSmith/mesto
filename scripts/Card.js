@@ -1,11 +1,11 @@
-import { imagePopup, pictImagePopup, titleImagePopup, press } from './constants.js';
+import { press } from './constants.js';
 
 export default class Card {
-  constructor(card, setTemplateSelector) {
+  constructor(card, setTemplateSelector, handleOpenCardPopup) {
     this._setTemplateSelector = setTemplateSelector;
+    this._handleOpenCardPopup = handleOpenCardPopup;
     this._name = card.name;
     this._link = card.link;
-    this._handleByEscapeBound = this._handleByEscape.bind(this);
   }
 
   _getCardTemplate() {
@@ -26,33 +26,10 @@ export default class Card {
     this._cardPicture.alt = this._name;
     this._cardLikeButton = this._elementCard.querySelector('.cards__heart');
     this._cardTrashButton = this._elementCard.querySelector('.cards__trash');
-    this._cardCloseButton = imagePopup.querySelector('.popup__close');
 
     this._setEventListeners();
 
     return this._elementCard;
-  }
-
-  _handleByEscape(evt) {
-    if (evt.key === 'Escape') {
-      this._handleCardClose();
-    }
-  };
-
-  _handleCardClose() {
-    imagePopup.classList.remove('popup_visible');
-
-    titleImagePopup.textContent = '';
-    pictImagePopup.src = '';
-    pictImagePopup.alt = '';
-  };
-
-  _handleCardClick() {
-    titleImagePopup.textContent = this._name;
-    pictImagePopup.src = this._link;
-    pictImagePopup.alt = this._name;
-
-    imagePopup.classList.add('popup_visible');
   }
 
   _handleCardLike() {
@@ -60,26 +37,23 @@ export default class Card {
   }
 
   _handleCardTrash() {
-    this._cardTrashButton.closest('.cards').remove();
+    this._elementCard.remove();
+    this._elementCard = null;
   }
 
   _setEventListeners() {
+
     this._cardLikeButton.addEventListener(press, () => {
       this._handleCardLike();
-    })
+    });
 
     this._cardTrashButton.addEventListener(press, () => {
       this._handleCardTrash();
-    })
+    });
 
     this._cardPicture.addEventListener(press, () => {
-      this._handleCardClick();
-      document.addEventListener('keydown', this._handleByEscapeBound);
-    })
-
-    this._cardCloseButton.addEventListener(press, () => {
-      this._handleCardClose();
-      document.removeEventListener('keydown', this._handleByEscapeBound);
-    })
+      this._handleOpenCardPopup(this._name, this._link);
+    });
   }
 }
+

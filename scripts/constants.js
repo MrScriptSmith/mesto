@@ -1,22 +1,5 @@
-// Константы для модуля card.js
-const imagePopup = document.querySelector('.image-popup');
-const pictImagePopup = imagePopup.querySelector('.image-popup__img');
-const titleImagePopup = imagePopup.querySelector('.image-popup__title');
-
-
 // Константы для модуля card.js, index.js
 const press = 'ontouchstart' in window ? 'touchstart' : 'click';
-
-//Константы для модуля formValidator.js
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  visibleErrorClass: 'popup__input-text-error_visible',
-  errorClassTemplate: '.popup__input-text-error_type_'
-};
-const forms = Array.from(document.forms);
 
 //Константы для модуля  index.js
 const initialCards = [
@@ -47,6 +30,19 @@ const initialCards = [
 ];
 
 
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  visibleErrorClass: 'popup__input-text-error_visible',
+  errorClassTemplate: '.popup__input-text-error_type_'
+};
+
+const forms = Array.from(document.forms);
+const imagePopup = document.querySelector('.image-popup');
+const pictImagePopup = imagePopup.querySelector('.image-popup__img');
+const titleImagePopup = imagePopup.querySelector('.image-popup__title');
 const editPopup = document.querySelector('#popup-edit');
 const addPopup = document.querySelector('#popup-add');
 const buttonEditPopup = document.querySelector('.profile__button-edit');

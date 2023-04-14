@@ -47,9 +47,6 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
 
     this._form.addEventListener('reset', () => {
       this._disableButton();
@@ -65,5 +62,5 @@ export default class FormValidator {
 
   enableValidation() {
     this._setEventListeners();
-}
+  }
 }

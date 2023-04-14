@@ -1,4 +1,7 @@
 import {
+  imagePopup,
+  pictImagePopup,
+  titleImagePopup,
   press,
   initialCards,
   validationConfig,
@@ -24,7 +27,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
 function createCard(card) {
-  const newCard = new Card(card, "#cardTemplate");
+  const newCard = new Card(card, "#cardTemplate", handleOpenImagePopup);
   return newCard.generateCard();
 }
 
@@ -41,6 +44,13 @@ forms.forEach((form) => {
 function openPopup(popup) {
   popup.classList.add('popup_visible');
   document.addEventListener('keydown', closeByEscape);
+}
+
+function handleOpenImagePopup(name, link) {
+  titleImagePopup.textContent = name;
+  pictImagePopup.src = link;
+  pictImagePopup.alt = name;
+  openPopup(imagePopup);
 }
 
 function closePopup(popup) {
