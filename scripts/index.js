@@ -19,15 +19,21 @@ import {
   cardForm,
   buttonAddPopup,
   closeButtons,
+<<<<<<< HEAD
   // cardsContainer,
   pressOrMouseDown,
   selectorCardsContainer
+=======
+  cardsContainer,
+  pressOrMouseDown,
+>>>>>>> c3fea2c5e079aa0c07825b38bb1551235eb79e57
 } from './utils/constants.js';
 
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 
+<<<<<<< HEAD
 function createAndAddCard(cardObject, cardListInstance, toTop = false) {
   const newCard = new Card(cardObject, '#cardTemplate', handleOpenImagePopup);
   const cardElement = newCard.generateCard();
@@ -57,6 +63,28 @@ cardList.renderer();
 //   cardsContainer.append(createCard(card));
 // })
 
+=======
+const cardList = new Section({
+  items: initialCards,
+  renderer: (card) => {
+    const newCard = new Card(card, '#cardTemplate', handleOpenImagePopup);
+    const cardElement = newCard.generateCard();
+    cardList.addItem(cardElement);
+  }
+}, cardsContainer);
+
+cardList.renderer();
+
+// function createCard(card) {
+//   const newCard = new Card(card, '#cardTemplate', handleOpenImagePopup);
+//   return newCard.generateCard();
+// }
+
+// initialCards.forEach((card) => {
+//   cardsContainer.append(createCard(card));
+// })
+
+>>>>>>> c3fea2c5e079aa0c07825b38bb1551235eb79e57
 
 
 forms.forEach((form) => {
