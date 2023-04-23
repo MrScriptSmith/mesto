@@ -43,8 +43,8 @@ const forms = Array.from(document.forms);
 const imagePopup = document.querySelector('.image-popup');
 const pictImagePopup = imagePopup.querySelector('.image-popup__img');
 const titleImagePopup = imagePopup.querySelector('.image-popup__title');
-const editPopup = document.querySelector('#popup-edit');
-const addPopup = document.querySelector('#popup-add');
+// const editPopup = document.querySelector('#popup-edit');
+// const addPopup = document.querySelector('#popup-add');
 const buttonEditPopup = document.querySelector('.profile__button-edit');
 const userName = document.querySelector('.popup__input_type_username');
 const userActivity = document.querySelector('.popup__input_type_useractivity');
@@ -62,15 +62,15 @@ const pressOrMouseDown = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
 
 
 export {
-  imagePopup,
+  // imagePopup,
   pictImagePopup,
   titleImagePopup,
   press,
   validationConfig,
   forms,
   initialCards,
-  editPopup,
-  addPopup,
+  // editPopup,
+  // addPopup,
   buttonEditPopup,
   userName,
   userActivity,
