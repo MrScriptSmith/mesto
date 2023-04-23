@@ -1,4 +1,4 @@
-import { press } from './constants.js';
+import { press } from '../utils/constants.js';
 
 export default class Card {
   constructor(card, setTemplateSelector, handleOpenCardPopup) {

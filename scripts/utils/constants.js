@@ -56,7 +56,8 @@ const profileForm = document.forms['profile-form'];
 const cardForm = document.forms['card-form'];
 const buttonAddPopup = document.querySelector('.profile__button-add');
 const closeButtons = document.querySelectorAll('.popup__close');
-const cardsContainer = document.querySelector('.places__cards');
+// const cardsContainer = document.querySelector('.places__cards');
+const cardsContainer = '.places__cards';
 const pressOrMouseDown = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
 
 
