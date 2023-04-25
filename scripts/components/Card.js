@@ -1,11 +1,11 @@
 import { press } from '../utils/constants.js';
 
 export default class Card {
-  constructor(card, setTemplateSelector, handleOpenCardPopup) {
+  constructor(card, setTemplateSelector, PopupWithImage) {
     this._setTemplateSelector = setTemplateSelector;
-    this._handleOpenCardPopup = handleOpenCardPopup;
     this._name = card.name;
     this._link = card.link;
+    this._popupWithImage = PopupWithImage;
   }
 
   _getCardTemplate() {
@@ -32,6 +32,10 @@ export default class Card {
     return this._elementCard;
   }
 
+  _handleCardClick() {
+    this._popupWithImage.open({ name: this._name, link: this._link });
+  }
+
   _handleCardLike() {
     this._cardLikeButton.classList.toggle('cards__heart_active');
   }
@@ -52,7 +56,7 @@ export default class Card {
     });
 
     this._cardPicture.addEventListener(press, () => {
-      this._handleOpenCardPopup(this._name, this._link);
+      this._handleCardClick();
     });
   }
 }

@@ -1,3 +1,5 @@
+import { pressOrMouseDown } from '../utils/constants.js';
+
 export default class Popup {
   constructor(selectorPopup) {
     this._popup = document.querySelector(selectorPopup);
@@ -28,6 +30,6 @@ export default class Popup {
   }
 
   setEventListener() {
-    this._popup.addEventListener('ontouchstart' in window ? 'touchstart' : 'mousedown', this._handleClickClose);
+    this._popup.addEventListener(pressOrMouseDown, this._handleClickClose);
   }
 }
