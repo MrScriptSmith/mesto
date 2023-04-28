@@ -31,7 +31,7 @@ export default class Card {
 
     return this._elementCard;
   }
-
+ ко
   _handleCardClick() {
     this._popupWithImage.open({ name: this._name, link: this._link });
   }

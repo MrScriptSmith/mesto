@@ -29,7 +29,7 @@ export default class Popup {
     }
   }
 
-  setEventListener() {
+  setEventListeners() {
     this._popup.addEventListener(pressOrMouseDown, this._handleClickClose);
   }
 }

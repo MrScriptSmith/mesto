@@ -6,12 +6,9 @@ import {
   buttonEditPopup,
   userName,
   userActivity,
-  cardName,
-  cardLink,
   profileName,
   profileActivity,
   profileForm,
-  cardForm,
   buttonAddPopup,
   selectorCardsContainer,
 } from './utils/constants.js';
@@ -21,40 +18,35 @@ import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
 import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
 
 const editPopup = new Popup('#popup-edit');
-const addPopup = new Popup('#popup-add');
+const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
+  cardList.addItemToTop(createCard(cardObject));
+});
 const imagePopup = new PopupWithImage('.image-popup');
-editPopup.setEventListener();
-addPopup.setEventListener();
-imagePopup.setEventListener();
 
-function createAndAddCard(cardObject, cardListInstance, toTop = false) {
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+imagePopup.setEventListeners();
+
+function createCard(cardObject) {
   const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
-  const cardElement = newCard.generateCard();
-
-  if(toTop) {
-    cardListInstance.addItemToTop(cardElement);
-  } else {
-    cardListInstance.addItemToBottom(cardElement);
-  }
+  return newCard.generateCard();
 }
 
 const cardList = new Section({
   items: initialCards,
-  renderer: (card) => {
-    createAndAddCard(card, cardList);
+  renderer: (cardObject) => {
+    cardList.addItemToBottom(createCard(cardObject));
   }
 }, selectorCardsContainer);
-
 cardList.renderer();
-
 
 forms.forEach((form) => {
   const formValidator = new FormValidator(validationConfig, form);
   formValidator.enableValidation();
 });
-
 
 function handleProfileFormSubmit(event) {
   event.preventDefault();
@@ -63,19 +55,6 @@ function handleProfileFormSubmit(event) {
   profileName.textContent = nameInput;
   profileActivity.textContent = jobInput;
   editPopup.close();
-}
-
-function saveFormAdd(event) {
-  event.preventDefault();
-  if (cardName.value && cardLink.value) {
-    const cardObject = {
-      name: cardName.value,
-      link: cardLink.value,
-    };
-    createAndAddCard(cardObject, cardList, true);
-    addPopup.close();
-    cardForm.reset();
-  }
 }
 
 buttonEditPopup.addEventListener(press, () => {
@@ -88,7 +67,6 @@ buttonAddPopup.addEventListener(press, () => {
   addPopup.open();
 });
 
-
 profileForm.addEventListener('submit', handleProfileFormSubmit);
-cardForm.addEventListener('submit', saveFormAdd);
+
 
