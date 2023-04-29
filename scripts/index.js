@@ -2,13 +2,13 @@ import {
   press,
   initialCards,
   validationConfig,
-  forms,
   buttonEditPopup,
-  userName,
-  userActivity,
+  userInputName,
+  userInputActivity,
   profileName,
   profileActivity,
   profileForm,
+  cardForm,
   buttonAddPopup,
   selectorCardsContainer,
 } from './utils/constants.js';
@@ -16,15 +16,27 @@ import {
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
-import Popup from './components/Popup.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
 
-const editPopup = new Popup('#popup-edit');
+const userInfo = new UserInfo(profileName, profileActivity);
+
+const editPopup = new PopupWithForm('#popup-edit', (data) => {
+  console.log(data);
+  userInfo.setUserInfo({
+    name: data.username,
+    activity: data.useractivity
+  });
+});
+
 const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
   cardList.addItemToTop(createCard(cardObject));
 });
 const imagePopup = new PopupWithImage('.image-popup');
+
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+const cardFormValidator = new FormValidator(validationConfig, cardForm);
 
 editPopup.setEventListeners();
 addPopup.setEventListeners();
@@ -42,31 +54,18 @@ const cardList = new Section({
   }
 }, selectorCardsContainer);
 cardList.renderer();
-
-forms.forEach((form) => {
-  const formValidator = new FormValidator(validationConfig, form);
-  formValidator.enableValidation();
-});
-
-function handleProfileFormSubmit(event) {
-  event.preventDefault();
-  const nameInput = userName.value;
-  const jobInput = userActivity.value;
-  profileName.textContent = nameInput;
-  profileActivity.textContent = jobInput;
-  editPopup.close();
-}
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 buttonEditPopup.addEventListener(press, () => {
-  userName.value = profileName.textContent;
-  userActivity.value = profileActivity.textContent;
+  const defaultUserInfo = userInfo.getUserInfo();
+  userInputName.value = defaultUserInfo.name;
+  userInputActivity.value = defaultUserInfo.activity;
+  profileFormValidator.toggleButtonState();
   editPopup.open();
+
 });
 
 buttonAddPopup.addEventListener(press, () => {
   addPopup.open();
 });
-
-profileForm.addEventListener('submit', handleProfileFormSubmit);
-
-

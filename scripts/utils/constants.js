@@ -43,12 +43,12 @@ const forms = Array.from(document.forms);
 const pictImagePopup = '.image-popup__img';
 const titleImagePopup = '.image-popup__title';
 const buttonEditPopup = document.querySelector('.profile__button-edit');
-const userName = document.querySelector('.popup__input_type_username');
-const userActivity = document.querySelector('.popup__input_type_useractivity');
+const userInputName = document.querySelector('.popup__input_type_username');
+const userInputActivity = document.querySelector('.popup__input_type_useractivity');
 const cardName = document.querySelector('.popup__input_type_card-name');
 const cardLink = document.querySelector('.popup__input_type_card-link');
-const profileName = document.querySelector('.profile__name');
-const profileActivity = document.querySelector('.profile__activity');
+const profileName = '.profile__name';
+const profileActivity = '.profile__activity';
 const profileForm = document.forms['profile-form'];
 const cardForm = document.forms['card-form'];
 const buttonAddPopup = document.querySelector('.profile__button-add');
@@ -66,8 +66,8 @@ export {
   forms,
   initialCards,
   buttonEditPopup,
-  userName,
-  userActivity,
+  userInputName,
+  userInputActivity,
   cardName,
   cardLink,
   profileName,

@@ -1,7 +1,4 @@
 import Popup from "./Popup.js";
-import {
-  cardForm
-} from '../utils/constants.js';
 
 export default class PopupWithForm extends Popup {
   constructor(selectorPopup, submitCallBack) {
@@ -22,16 +19,18 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitCallBack(this._getInputValues());
       this.close()
     });
+    super.setEventListeners();
   }
 
   close() {
-    super.close();
     this._form.reset();
+
+    super.close();
+
   }
 }
