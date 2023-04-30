@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 
 import {
   press,
@@ -13,19 +13,18 @@ import {
   cardForm,
   buttonAddPopup,
   selectorCardsContainer,
-} from './utils/constants.js';
+} from '../scripts/utils/constants.js';
 
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Section from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
 const userInfo = new UserInfo(profileName, profileActivity);
 
 const editPopup = new PopupWithForm('#popup-edit', (data) => {
-  console.log(data);
   userInfo.setUserInfo({
     name: data.username,
     activity: data.useractivity
@@ -37,8 +36,19 @@ const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
 });
 const imagePopup = new PopupWithImage('.image-popup');
 
-const profileFormValidator = new FormValidator(validationConfig, profileForm);
-const cardFormValidator = new FormValidator(validationConfig, cardForm);
+const formValidators = {};
+
+function enableValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((form) => {
+    const validator = new FormValidator(config, form);
+    const formName = form.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
 
 editPopup.setEventListeners();
 addPopup.setEventListeners();
@@ -56,18 +66,16 @@ const cardList = new Section({
   }
 }, selectorCardsContainer);
 cardList.renderer();
-profileFormValidator.enableValidation();
-cardFormValidator.enableValidation();
 
 buttonEditPopup.addEventListener(press, () => {
   const defaultUserInfo = userInfo.getUserInfo();
   userInputName.value = defaultUserInfo.name;
   userInputActivity.value = defaultUserInfo.activity;
-  profileFormValidator.toggleButtonState();
+  formValidators[ profileForm.getAttribute('name') ].resetValidation();
   editPopup.open();
-
 });
 
 buttonAddPopup.addEventListener(press, () => {
+  formValidators[ cardForm.getAttribute('name') ].resetValidation();
   addPopup.open();
 });

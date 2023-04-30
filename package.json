@@ -2,7 +2,7 @@
   "name": "mesto3",
   "version": "1.0.0",
   "description": "* Интро\r * Фичи\r * Ссылка\r * Планы по доработке",
-  "main": "./src/scripts/index.js",
+  "main": "./src/pages/index.js",
   "scripts": {
     "build": "rm -rf dist && webpack --mode production",
     "dev": "webpack serve"
