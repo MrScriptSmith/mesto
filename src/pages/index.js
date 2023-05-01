@@ -29,6 +29,7 @@ const editPopup = new PopupWithForm('#popup-edit', (data) => {
     name: data.username,
     activity: data.useractivity
   });
+
 });
 
 const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
@@ -69,8 +70,7 @@ cardList.renderer();
 
 buttonEditPopup.addEventListener(press, () => {
   const defaultUserInfo = userInfo.getUserInfo();
-  userInputName.value = defaultUserInfo.name;
-  userInputActivity.value = defaultUserInfo.activity;
+  editPopup.setInputValues(defaultUserInfo);
   formValidators[ profileForm.getAttribute('name') ].resetValidation();
   editPopup.open();
 });
