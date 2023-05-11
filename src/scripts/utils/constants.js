@@ -47,6 +47,13 @@ const validationConfig = {
   errorClassTemplate: '.popup__input-text-error_type_'
 };
 
+const serverConfig = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  key: '608096ab-91fa-4cd3-8368-f20c618391fd',
+  userUrl: '/users/me',
+  cardUrl: '#'
+};
+
 const forms = Array.from(document.forms);
 const pictImagePopup = '.image-popup__img';
 const titleImagePopup = '.image-popup__title';
@@ -88,5 +95,6 @@ export {
   closeButtons,
   cardsContainer,
   pressOrMouseDown,
-  selectorCardsContainer
+  selectorCardsContainer,
+  serverConfig
 };

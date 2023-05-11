@@ -1,6 +1,9 @@
 export default class Api {
-  constructor(options) {
-    this.options = options;
+  constructor({ url, key, userUrl, cardUrl }) {
+    this._generalUrl = url;
+    this._userUrl = userUrl;
+    this._privateKey = key;
+    this._cardUrl - cardUrl;
   }
 
   _checkResponse(response) {
@@ -11,15 +14,25 @@ export default class Api {
   }
 
   async updateInfoForUser() {
-    const response = await fetch(this.options, {
+    const response = await fetch(`${this._generalUrl}${this._userUrl}`, {
       headers: {
-        authorization: '608096ab-91fa-4cd3-8368-f20c618391fd'
+        authorization: this._privateKey
       }
     });
 
     const jsonAnswer = await this._checkResponse(response);
     return jsonAnswer;
   }
+
+  // async updateCard() {
+  //   const response = await fetch(this.options, {
+  //     headers: {
+  //       authorization: '608096ab-91fa-4cd3-8368-f20c618391fd'
+  //     }
+  //   });
+
+
+  // }
 }
 
 

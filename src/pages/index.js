@@ -14,6 +14,7 @@ import {
   cardForm,
   buttonAddPopup,
   selectorCardsContainer,
+  serverConfig
 } from '../scripts/utils/constants.js';
 
 import Card from '../scripts/components/Card.js';
@@ -27,7 +28,7 @@ import Api from '../scripts/components/Api.js';
 
 async function updateUserInfo() {
   try {
-    const api = new Api('https://nomoreparties.co/v1/cohort-65/users/me');
+    const api = new Api(serverConfig);
     const data = await api.updateInfoForUser();
     userInfo.setUserInfo({ name: data.name, activity: data.about, avatar: data.avatar });
   } catch (error) {
