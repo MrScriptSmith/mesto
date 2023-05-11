@@ -5,10 +5,11 @@ import {
   initialCards,
   validationConfig,
   buttonEditPopup,
-  userInputName,
-  userInputActivity,
+  // userInputName,
+  // userInputActivity,
   profileName,
   profileActivity,
+  profileAvatar,
   profileForm,
   cardForm,
   buttonAddPopup,
@@ -21,8 +22,24 @@ import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js';
 
-const userInfo = new UserInfo(profileName, profileActivity);
+
+async function updateUserInfo() {
+  try {
+    const api = new Api('https://nomoreparties.co/v1/cohort-65/users/me');
+    const data = await api.updateInfoForUser();
+    userInfo.setUserInfo({ name: data.name, activity: data.about, avatar: data.avatar });
+  } catch (error) {
+    console.error(`Ошибка при загрузки: ${error}`);
+  }
+};
+updateUserInfo();
+
+
+
+
+const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
 
 const editPopup = new PopupWithForm('#popup-edit', (data) => {
   userInfo.setUserInfo({

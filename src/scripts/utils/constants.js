@@ -57,6 +57,7 @@ const cardName = document.querySelector('.popup__input_type_card-name');
 const cardLink = document.querySelector('.popup__input_type_card-link');
 const profileName = '.profile__name';
 const profileActivity = '.profile__activity';
+const profileAvatar = '.profile__avatar';
 const profileForm = document.forms['profile-form'];
 const cardForm = document.forms['card-form'];
 const buttonAddPopup = document.querySelector('.profile__button-add');
@@ -80,6 +81,7 @@ export {
   cardLink,
   profileName,
   profileActivity,
+  profileAvatar,
   profileForm,
   cardForm,
   buttonAddPopup,
