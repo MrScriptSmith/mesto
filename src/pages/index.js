@@ -29,8 +29,26 @@ import Api from '../scripts/components/Api.js';
 async function updateUserInfo() {
   try {
     const api = new Api(serverConfig);
-    const data = await api.updateInfoForUser();
-    userInfo.setUserInfo({ name: data.name, activity: data.about, avatar: data.avatar });
+    const [dataProfile, dataCards] = await Promise.all([
+      api.updateUserInfo(),
+      api.updateCardInfo(),
+    ]);
+    userInfo.setUserInfo({
+      name: dataProfile.name,
+      activity: dataProfile.about,
+      avatar: dataProfile.avatar
+    });
+
+    const cardList = new Section({
+      items: dataCards,
+      renderer: cardObject => {
+        const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
+        cardList.addItemToBottom(newCard.generateCard());
+      }
+    }, selectorCardsContainer);
+
+    cardList.renderer();
+
   } catch (error) {
     console.error(`Ошибка при загрузки: ${error}`);
   }
@@ -73,18 +91,18 @@ editPopup.setEventListeners();
 addPopup.setEventListeners();
 imagePopup.setEventListeners();
 
-function createCard(cardObject) {
-  const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
-  return newCard.generateCard();
-}
+// function createCard(cardObject) {
+//   const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
+//   return newCard.generateCard();
+// }
 
-const cardList = new Section({
-  items: initialCards,
-  renderer: (cardObject) => {
-    cardList.addItemToBottom(createCard(cardObject));
-  }
-}, selectorCardsContainer);
-cardList.renderer();
+// const cardList = new Section({
+//   items: initialCards,
+//   renderer: (cardObject) => {
+//     cardList.addItemToBottom(createCard(cardObject));
+//   }
+// }, selectorCardsContainer);
+// cardList.renderer();
 
 buttonEditPopup.addEventListener(press, () => {
   const defaultUserInfo = userInfo.getUserInfo();

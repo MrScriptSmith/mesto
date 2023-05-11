@@ -51,7 +51,7 @@ const serverConfig = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-65',
   key: '608096ab-91fa-4cd3-8368-f20c618391fd',
   userUrl: '/users/me',
-  cardUrl: '#'
+  cardUrl: '/cards'
 };
 
 const forms = Array.from(document.forms);
