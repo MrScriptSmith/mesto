@@ -13,7 +13,7 @@ export default class Api {
     return response.json();
   }
 
-  async updateUserInfo() {
+  async updateProfileInfo() {
     const response = await fetch(`${this._generalUrl}${this._userUrl}`, {
       headers: {
         authorization: this._privateKey
@@ -29,6 +29,23 @@ export default class Api {
       headers: {
         authorization: this._privateKey
       }
+    });
+
+    const jsonAnswer = await this._checkResponse(response);
+    return jsonAnswer;
+  }
+
+  async patchProfileInfo(data) {
+    const response = await fetch(`${this._generalUrl}${this._userUrl}`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._privateKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.username,
+        about: data.useractivity
+      })
     });
 
     const jsonAnswer = await this._checkResponse(response);

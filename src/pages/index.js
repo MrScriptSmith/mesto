@@ -2,11 +2,8 @@ import './index.css';
 
 import {
   press,
-  initialCards,
   validationConfig,
   buttonEditPopup,
-  // userInputName,
-  // userInputActivity,
   profileName,
   profileActivity,
   profileAvatar,
@@ -25,12 +22,13 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
+const api = new Api(serverConfig);
+const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
 
-async function updateUserInfo() {
+async function getUserInfo() {
   try {
-    const api = new Api(serverConfig);
     const [dataProfile, dataCards] = await Promise.all([
-      api.updateUserInfo(),
+      api.updateProfileInfo(),
       api.updateCardInfo(),
     ]);
     userInfo.setUserInfo({
@@ -53,20 +51,22 @@ async function updateUserInfo() {
     console.error(`Ошибка при загрузки: ${error}`);
   }
 };
-updateUserInfo();
+getUserInfo();
 
 
-
-
-const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
-
-const editPopup = new PopupWithForm('#popup-edit', (data) => {
-  userInfo.setUserInfo({
-    name: data.username,
-    activity: data.useractivity
-  });
-
+const editPopup = new PopupWithForm('#popup-edit', async (data) => {
+  try {
+    const dataProfile = await api.patchProfileInfo(data);
+    userInfo.setUserInfo({
+      name: dataProfile.name,
+      activity: dataProfile.about,
+      avatar: dataProfile.avatar
+    });
+  } catch (error) {
+    console.error(`Ошибка при обновлении информации о профиле: ${error}`);
+  }
 });
+
 
 const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
   cardList.addItemToTop(createCard(cardObject));
@@ -91,6 +91,53 @@ editPopup.setEventListeners();
 addPopup.setEventListeners();
 imagePopup.setEventListeners();
 
+buttonEditPopup.addEventListener(press, () => {
+  const defaultUserInfo = userInfo.getUserInfo();
+  editPopup.setInputValues(defaultUserInfo);
+  formValidators[ profileForm.getAttribute('name') ].resetValidation();
+  editPopup.open();
+});
+
+buttonAddPopup.addEventListener(press, () => {
+  formValidators[ cardForm.getAttribute('name') ].resetValidation();
+  addPopup.open();
+});
+
+
+
+
+// async function patchUserInfo() {
+//   try {
+//     const defaultUserInfo = userInfo.getUserInfo();
+//     const editPopup = new PopupWithForm('#popup-edit', async () => {
+//       const dataProfile = await api.patchProfileInfo(defaultUserInfo);
+//       userInfo.setUserInfo({
+//         name: dataProfile.username,
+//         activity: dataProfile.useractivity
+//       });
+//     });
+
+//     editPopup.setEventListeners();
+//   } catch (error) {
+//     console.error(`Ошибка при загрузки: ${error}`);
+//   }
+// }
+
+// patchUserInfo();
+
+
+
+
+
+
+// const editPopup = new PopupWithForm('#popup-edit', (data) => {
+//   userInfo.setUserInfo({
+//     name: data.username,
+//     activity: data.useractivity
+//   });
+
+// });
+
 // function createCard(cardObject) {
 //   const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
 //   return newCard.generateCard();
@@ -103,15 +150,3 @@ imagePopup.setEventListeners();
 //   }
 // }, selectorCardsContainer);
 // cardList.renderer();
-
-buttonEditPopup.addEventListener(press, () => {
-  const defaultUserInfo = userInfo.getUserInfo();
-  editPopup.setInputValues(defaultUserInfo);
-  formValidators[ profileForm.getAttribute('name') ].resetValidation();
-  editPopup.open();
-});
-
-buttonAddPopup.addEventListener(press, () => {
-  formValidators[ cardForm.getAttribute('name') ].resetValidation();
-  addPopup.open();
-});
