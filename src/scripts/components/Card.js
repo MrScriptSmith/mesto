@@ -6,6 +6,7 @@ export default class Card {
     this._name = card.name;
     this._link = card.link;
     this._popupWithImage = PopupWithImage;
+    this._likeCount = card.likes.length;
   }
 
   _getCardTemplate() {
@@ -26,7 +27,9 @@ export default class Card {
     this._cardPicture.alt = this._name;
     this._cardLikeButton = this._elementCard.querySelector('.cards__heart');
     this._cardTrashButton = this._elementCard.querySelector('.cards__trash');
+    this._cardLikeCount = this._elementCard.querySelector('.cards__heart-count');
 
+    this._setLikesCount(this._likeCount);
     this._setEventListeners();
 
     return this._elementCard;
@@ -43,6 +46,10 @@ export default class Card {
   _handleCardTrash() {
     this._elementCard.remove();
     this._elementCard = null;
+  }
+
+  _setLikesCount(count) {
+    this._cardLikeCount.textContent = count.toString();
   }
 
   _setEventListeners() {

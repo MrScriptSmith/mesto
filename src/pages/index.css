@@ -20,9 +20,11 @@
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/cards/__img/cards__img.css);
 @import url(../blocks/cards/__name-form/cards__name-form.css);
+@import url(../blocks/cards/__heart-box/cards__heart-box.css);
 @import url(../blocks/cards/__name/cards__name.css);
 @import url(../blocks/cards/__heart/cards__heart.css);
 @import url(../blocks/cards/__heart/_active/cards__heart_active.css);
+@import url(../blocks/cards/__heart-count/cards__heart-count.css);
 @import url(../blocks/cards/__trash/cards__trash.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

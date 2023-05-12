@@ -19,18 +19,14 @@
         <a href="#"
           ><img
             src="<%=require('./images/Logo.svg')%>"
-            alt='Логотип'
+            alt="Логотип"
             class="logo button-clickable"
         /></a>
       </header>
       <main class="content">
         <section class="profile">
           <div class="profile__info">
-            <img
-              src=""
-              alt="Аватар"
-              class="profile__avatar"
-            />
+            <img src="" alt="Аватар" class="profile__avatar" />
             <div class="profile__data">
               <h1 class="profile__name"></h1>
               <button
@@ -59,11 +55,14 @@
                 <img src="#" alt="#" class="cards__img cursor-pointer" />
                 <div class="cards__name-form">
                   <h2 class="cards__name"></h2>
-                  <button
-                    class="cards__heart cursor-pointer"
-                    aria-label="Сердце"
-                    type="button"
-                  ></button>
+                  <div class="cards__heart-box">
+                    <button
+                      class="cards__heart cursor-pointer"
+                      aria-label="Сердце"
+                      type="button"
+                    ></button>
+                    <p class="cards__heart-count"></p>
+                  </div>
                 </div>
               </li>
             </template>
@@ -97,7 +96,9 @@
               maxlength="40"
               required
             />
-            <span class="popup__input-text-error popup__input-text-error_type_username"></span>
+            <span
+              class="popup__input-text-error popup__input-text-error_type_username"
+            ></span>
             <input
               name="useractivity"
               type="text"
@@ -107,10 +108,10 @@
               maxlength="200"
               required
             />
-            <span class="popup__input-text-error popup__input-text-error_type_useractivity"></span>
-            <button type="submit" class="popup__submit">
-              Сохранить
-            </button>
+            <span
+              class="popup__input-text-error popup__input-text-error_type_useractivity"
+            ></span>
+            <button type="submit" class="popup__submit">Сохранить</button>
           </form>
         </div>
       </div>
@@ -138,7 +139,9 @@
               maxlength="30"
               required
             />
-            <span class="popup__input-text-error popup__input-text-error_type_name"></span>
+            <span
+              class="popup__input-text-error popup__input-text-error_type_name"
+            ></span>
             <input
               name="link"
               type="url"
@@ -146,8 +149,14 @@
               class="popup__input popup__input_type_card-link"
               required
             />
-            <span class="popup__input-text-error popup__input-text-error_type_link"></span>
-            <button disabled type="submit" class="popup__submit popup__submit_inactive">
+            <span
+              class="popup__input-text-error popup__input-text-error_type_link"
+            ></span>
+            <button
+              disabled
+              type="submit"
+              class="popup__submit popup__submit_inactive"
+            >
               Создать
             </button>
           </form>

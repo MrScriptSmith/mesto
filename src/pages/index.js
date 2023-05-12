@@ -49,7 +49,10 @@ async function getUserInfo() {
     });
 
     dataCards.forEach((cardData) => {
-      cardList.addItemToBottom(createCard(cardData));
+      const card = createCard(cardData);
+      // card.setLikesCount(cardData.likes.length);
+      cardList.addItemToBottom(card);
+      // cardList.addItemToBottom(createCard(cardData));
     });
 
     // const cardList = new Section({
