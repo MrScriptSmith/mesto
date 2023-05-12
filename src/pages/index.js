@@ -25,11 +25,22 @@ import Api from '../scripts/components/Api.js';
 const api = new Api(serverConfig);
 const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
 
+function createCard(cardObject) {
+  const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
+  return newCard.generateCard();
+}
+
+const cardList = new Section({
+  renderer: (cardObject) => {
+    cardList.addItemToBottom(createCard(cardObject));
+  }
+}, selectorCardsContainer);
+
 async function getUserInfo() {
   try {
     const [dataProfile, dataCards] = await Promise.all([
-      api.updateProfileInfo(),
-      api.updateCardInfo(),
+      api.pullProfileInfo(),
+      api.pullCardInfo(),
     ]);
     userInfo.setUserInfo({
       name: dataProfile.name,
@@ -37,15 +48,19 @@ async function getUserInfo() {
       avatar: dataProfile.avatar
     });
 
-    const cardList = new Section({
-      items: dataCards,
-      renderer: cardObject => {
-        const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
-        cardList.addItemToBottom(newCard.generateCard());
-      }
-    }, selectorCardsContainer);
+    dataCards.forEach((cardData) => {
+      cardList.addItemToBottom(createCard(cardData));
+    });
 
-    cardList.renderer();
+    // const cardList = new Section({
+    //   items: dataCards,
+    //   renderer: cardObject => {
+    //     const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
+    //     cardList.addItemToBottom(newCard.generateCard());
+    //   }
+    // }, selectorCardsContainer);
+
+    // cardList.renderer();
 
   } catch (error) {
     console.error(`Ошибка при загрузки: ${error}`);
@@ -68,8 +83,14 @@ const editPopup = new PopupWithForm('#popup-edit', async (data) => {
 });
 
 
-const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
-  cardList.addItemToTop(createCard(cardObject));
+const addPopup = new PopupWithForm('#popup-add', async (cardObject) => {
+  try {
+    await api.pushCardInfo(cardObject);
+    cardList.addItemToTop(createCard(cardObject));
+  } catch (error) {
+    console.error(`Ошибка при обновлении информации о профиле: ${error}`);
+  }
+
 });
 const imagePopup = new PopupWithImage('.image-popup');
 
@@ -138,15 +159,6 @@ buttonAddPopup.addEventListener(press, () => {
 
 // });
 
-// function createCard(cardObject) {
-//   const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
-//   return newCard.generateCard();
-// }
 
-// const cardList = new Section({
-//   items: initialCards,
-//   renderer: (cardObject) => {
-//     cardList.addItemToBottom(createCard(cardObject));
-//   }
-// }, selectorCardsContainer);
+
 // cardList.renderer();

@@ -13,7 +13,7 @@ export default class Api {
     return response.json();
   }
 
-  async updateProfileInfo() {
+  async pullProfileInfo() {
     const response = await fetch(`${this._generalUrl}${this._userUrl}`, {
       headers: {
         authorization: this._privateKey
@@ -24,7 +24,7 @@ export default class Api {
     return jsonAnswer;
   }
 
-  async updateCardInfo() {
+  async pullCardInfo() {
     const response = await fetch(`${this._generalUrl}${this._cardUrl}`, {
       headers: {
         authorization: this._privateKey
@@ -45,6 +45,23 @@ export default class Api {
       body: JSON.stringify({
         name: data.username,
         about: data.useractivity
+      })
+    });
+
+    const jsonAnswer = await this._checkResponse(response);
+    return jsonAnswer;
+  }
+
+  async pushCardInfo(data) {
+    const response = await fetch(`${this._generalUrl}${this._cardUrl}`, {
+      method: 'POST',
+      headers: {
+        authorization: this._privateKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
       })
     });
 
