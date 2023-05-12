@@ -1,11 +1,12 @@
 import { press } from '../utils/constants.js';
 
 export default class Card {
-  constructor(card, setTemplateSelector, PopupWithImage) {
+  constructor(card, setTemplateSelector, popupWithImage, popupProofDelete) {
     this._setTemplateSelector = setTemplateSelector;
     this._name = card.name;
     this._link = card.link;
-    this._popupWithImage = PopupWithImage;
+    this._popupWithImage = popupWithImage;
+    this._popupProofDelete = popupProofDelete;
     this._likeCount = card.likes.length;
   }
 
@@ -44,8 +45,10 @@ export default class Card {
   }
 
   _handleCardTrash() {
-    this._elementCard.remove();
-    this._elementCard = null;
+    this._popupProofDelete.open(() => {
+      this._elementCard.remove();
+      this._elementCard = null;
+    });
   }
 
   _setLikesCount(count) {

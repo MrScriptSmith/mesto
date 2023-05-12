@@ -17,16 +17,20 @@ import {
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
+import PopupProofDelete from '../scripts/components/PopupProofDelete.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
+
 const api = new Api(serverConfig);
 const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
 
+
+
 function createCard(cardObject) {
-  const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
+  const newCard = new Card(cardObject, '#cardTemplate', imagePopup, deletePopup);
   return newCard.generateCard();
 }
 
@@ -50,20 +54,8 @@ async function getUserInfo() {
 
     dataCards.forEach((cardData) => {
       const card = createCard(cardData);
-      // card.setLikesCount(cardData.likes.length);
       cardList.addItemToBottom(card);
-      // cardList.addItemToBottom(createCard(cardData));
     });
-
-    // const cardList = new Section({
-    //   items: dataCards,
-    //   renderer: cardObject => {
-    //     const newCard = new Card(cardObject, '#cardTemplate', imagePopup);
-    //     cardList.addItemToBottom(newCard.generateCard());
-    //   }
-    // }, selectorCardsContainer);
-
-    // cardList.renderer();
 
   } catch (error) {
     console.error(`Ошибка при загрузки: ${error}`);
@@ -88,14 +80,17 @@ const editPopup = new PopupWithForm('#popup-edit', async (data) => {
 
 const addPopup = new PopupWithForm('#popup-add', async (cardObject) => {
   try {
-    await api.pushCardInfo(cardObject);
-    cardList.addItemToTop(createCard(cardObject));
+    const addedCard = await api.pushCardInfo(cardObject);
+    const newCard = createCard(addedCard);
+    cardList.addItemToTop(newCard);
   } catch (error) {
     console.error(`Ошибка при обновлении информации о профиле: ${error}`);
   }
 
 });
 const imagePopup = new PopupWithImage('.image-popup');
+
+const deletePopup = new PopupProofDelete('#popup-delete');
 
 const formValidators = {};
 
@@ -114,6 +109,7 @@ enableValidation(validationConfig);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 imagePopup.setEventListeners();
+deletePopup.setEventListeners();
 
 buttonEditPopup.addEventListener(press, () => {
   const defaultUserInfo = userInfo.getUserInfo();
@@ -126,42 +122,3 @@ buttonAddPopup.addEventListener(press, () => {
   formValidators[ cardForm.getAttribute('name') ].resetValidation();
   addPopup.open();
 });
-
-
-
-
-// async function patchUserInfo() {
-//   try {
-//     const defaultUserInfo = userInfo.getUserInfo();
-//     const editPopup = new PopupWithForm('#popup-edit', async () => {
-//       const dataProfile = await api.patchProfileInfo(defaultUserInfo);
-//       userInfo.setUserInfo({
-//         name: dataProfile.username,
-//         activity: dataProfile.useractivity
-//       });
-//     });
-
-//     editPopup.setEventListeners();
-//   } catch (error) {
-//     console.error(`Ошибка при загрузки: ${error}`);
-//   }
-// }
-
-// patchUserInfo();
-
-
-
-
-
-
-// const editPopup = new PopupWithForm('#popup-edit', (data) => {
-//   userInfo.setUserInfo({
-//     name: data.username,
-//     activity: data.useractivity
-//   });
-
-// });
-
-
-
-// cardList.renderer();

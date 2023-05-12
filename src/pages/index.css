@@ -33,8 +33,10 @@
 @import url(../blocks/popup/_visible/popup_visible.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__close-trash/popup__close-trash.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__name-trash/popup__name-trash.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(../blocks/popup/__input-text-error/popup__input-text-error.css);
