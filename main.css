@@ -487,11 +487,39 @@ template {
   }
 }
 
-.profile__avatar {
+.profile__avatar-container {
   border-radius: 50%;
+  position: relative;
   width: 120px;
   height: 120px;
+  overflow: hidden;
 }
+
+.profile__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile__avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(ae1a976ddb506239e9f0.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+.profile__avatar-overlay:hover {
+  opacity: 1;
+}
+
 
 .profile__data {
   display: -ms-grid;
@@ -643,17 +671,11 @@ template {
   padding: 0;
   margin: 0;
   border-radius: 10px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   overflow: hidden;
   background: #fff;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   max-width: 282px;
   position: relative;
 }
@@ -668,17 +690,22 @@ template {
 }
 
 .cards__name-form {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   max-width: 282px;
   min-height: 79px;
   color: #000;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.cards__heart-box {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
 }
 
 .cards__name {
@@ -700,8 +727,6 @@ template {
   margin: auto;
   background: no-repeat url(e3b9ba5840ebe97bc077.svg) center;
   opacity: 1;
-  -webkit-transition: opacity 0.3s ease;
-  -o-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
   border: none;
 }
@@ -713,6 +738,14 @@ template {
 .cards__heart_active {
   background-image: url(35948469632d0421d697.svg);
   opacity: 1;
+}
+
+.cards__heart-count {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.23;
 }
 
 .cards__trash {
@@ -768,21 +801,13 @@ template {
   left: 0;
   right: 0;
   bottom: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.5);
   z-index: 3;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -817,9 +842,7 @@ template {
 @media (max-width: 600px) {
   .popup__container {
     min-width: 282px;
-    -webkit-box-align: none;
-        -ms-flex-align: none;
-            align-items: none;
+    align-items: center;
   }
 }
 
@@ -831,8 +854,6 @@ template {
   border: none;
   box-sizing: border-box;
   background: no-repeat center/32px 32px url(039f1f5203f653b4bacd.svg);
-  top: calc(50% - 165px - 8px - 32px);
-  right: calc(50% - 215px - 8px - 32px);
 }
 
 @media (max-width: 600px) {
@@ -840,8 +861,42 @@ template {
     width: 20px;
     height: 20px;
     background-size: 20px 20px;
+  }
+}
+
+.popup__close_type_basic {
+  top: calc(50% - 165px - 8px - 32px);
+  right: calc(50% - 215px - 8px - 32px);
+}
+
+@media (max-width: 600px) {
+  .popup__close_type_basic {
     top: calc(50% - 161px - 16px - 20px);
     right: calc(50% - 141px);
+  }
+}
+
+.popup__close_type_avatar {
+  top: -40px;
+  right: -40px;
+}
+
+@media (max-width: 600px) {
+  .popup__close_type_avatar {
+    top: -20px;
+    right: -20px;
+  }
+}
+
+.popup__close_type_trash {
+  top: -40px;
+  right: -40px;
+}
+
+@media (max-width: 600px) {
+  .popup__close_type_trash {
+    top: -20px;
+    right: -20px;
   }
 }
 
@@ -872,6 +927,10 @@ template {
     font-size: 18px;
 
   }
+}
+
+.popup__name-trash {
+  margin-bottom: 30px;
 }
 
 .popup__input {
@@ -916,6 +975,10 @@ template {
 
 .popup__input-text-error_visible {
   visibility: visible;
+}
+
+.popup__input-text-error_type_avatar {
+  padding-top: 20px;
 }
 
 .popup__submit {
