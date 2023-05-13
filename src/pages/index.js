@@ -29,8 +29,8 @@ const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
 
 
 
-function createCard(cardObject) {
-  const newCard = new Card(cardObject, '#cardTemplate', imagePopup, deletePopup);
+function createCard(cardObject, myUserId) {
+  const newCard = new Card(cardObject, '#cardTemplate', imagePopup, deletePopup, myUserId);
   return newCard.generateCard();
 }
 
@@ -52,8 +52,10 @@ async function getUserInfo() {
       avatar: dataProfile.avatar
     });
 
+    const myUserId = dataProfile._id;
+
     dataCards.forEach((cardData) => {
-      const card = createCard(cardData);
+      const card = createCard(cardData, myUserId);
       cardList.addItemToBottom(card);
     });
 
