@@ -35,8 +35,24 @@ function createCard(cardObject, myUserId) {
     '#cardTemplate',
     imagePopup,
     myUserId,
-    (cardId, cardElement) => deletePopup.open(cardId, cardElement)
-    );
+    (cardId, cardElement) => deletePopup.open(cardId, cardElement),
+    async (cardId) => {
+      try {
+          const result = await api.likeCard(cardId);
+          newCard.setLikesCount(result.likes.length);
+      } catch (error) {
+          console.error(`Ошибка при лайке карточки: ${error}`);
+      }
+    },
+    async (cardId) => {
+      try {
+          const result = await api.dislikeCard(cardId);
+          newCard.setLikesCount(result.likes.length);
+      } catch (error) {
+          console.error(`Ошибка при дизлайке карточки: ${error}`);
+      }
+    }
+);
   return newCard.generateCard();
 }
 
@@ -67,7 +83,7 @@ async function getUserInfo() {
     });
 
   } catch (error) {
-    console.error(`Ошибка при загрузки: ${error}`);
+    console.error(`Ошибка при загрузке данных пользователя: ${error}`);
   }
 };
 getUserInfo();
@@ -93,7 +109,7 @@ const addPopup = new PopupWithForm('#popup-add', async (cardObject) => {
     const newCard = createCard(addedCard, userInfo.getUserId());
     cardList.addItemToTop(newCard);
   } catch (error) {
-    console.error(`Ошибка при обновлении информации о профиле: ${error}`);
+    console.error(`Ошибка при добавлении карточки: ${error}`);
   }
 
 });
@@ -105,7 +121,7 @@ const deletePopup = new PopupProofDelete('#popup-delete', async (cardId, cardEle
     cardElement.remove(); // удаление элемента после успешного ответа сервера
     cardElement = null;
   } catch (error) {
-    console.error(`Ошибка при обновлении информации о профиле: ${error}`);
+    console.error(`Ошибка при удалении карточки: ${error}`);
   }
 });
 

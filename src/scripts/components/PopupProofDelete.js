@@ -27,5 +27,6 @@ export default class PopupProofDelete extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._popup.querySelector('.popup__submit').addEventListener('click', this._handleDeleteProof);
+  };
+
   }
-}
