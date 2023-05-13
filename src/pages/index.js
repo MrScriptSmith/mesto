@@ -145,6 +145,7 @@ const avatarPopup = new PopupWithForm('#popup-edit-avatar', async (cardObject) =
     buttonSubmitPopupAvatar.textContent = 'Сохранение...';
     const updateAvatar = await api.pushAvatar(cardObject);
     userInfo.setUserAvatar(updateAvatar.avatar);
+    avatarPopup.close();
   } catch (error) {
     console.error(`Ошибка при обновлении аватара: ${error}`);
   } finally {
