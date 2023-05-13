@@ -82,6 +82,32 @@ export default class Api {
     return jsonAnswer;
   }
 
+  async likeCard(cardId) {
+    const response = await fetch(`${this._generalUrl}${this._cardUrl}/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._privateKey,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const jsonAnswer = await this._checkResponse(response);
+    return jsonAnswer;
+  }
+
+  async dislikeCard(cardId) {
+    const response = await fetch(`${this._generalUrl}${this._cardUrl}/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._privateKey,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const jsonAnswer = await this._checkResponse(response);
+    return jsonAnswer;
+  }
+
 
 }
 

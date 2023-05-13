@@ -1,7 +1,7 @@
 import { press } from '../utils/constants.js';
 
 export default class Card {
-  constructor(card, setTemplateSelector, popupWithImage, myUserId, handleDeleteClick) {
+  constructor(card, setTemplateSelector, popupWithImage, myUserId, handleDeleteClick, handleLikeClick, handleDislikeClick) {
     this._setTemplateSelector = setTemplateSelector;
     this._name = card.name;
     this._link = card.link;
@@ -11,7 +11,8 @@ export default class Card {
     this._ownerUserId = card.owner._id;
     this._myUserId = myUserId;
     this._cardId = card._id;
-    // this._handleCardTrash = this._handleCardTrash.bind(this);
+    this._handleLikeClick = handleLikeClick;
+    this._handleDislikeClick = handleDislikeClick;
   }
 
   _getCardTemplate() {
@@ -35,7 +36,7 @@ export default class Card {
     this._cardLikeCount = this._elementCard.querySelector('.cards__heart-count');
 
     this._checkCardId();
-    this._setLikesCount(this._likeCount);
+    this.setLikesCount(this._likeCount);
     this._setEventListeners();
 
     return this._elementCard;
@@ -53,14 +54,19 @@ export default class Card {
 
   _handleCardLike() {
     this._cardLikeButton.classList.toggle('cards__heart_active');
+    if (this._cardLikeButton.classList.contains('cards__heart_active')) {
+      this._handleLikeClick(this._cardId);
+    } else {
+      this._handleDislikeClick(this._cardId);
+   }
   }
 
   _handleCardTrash() {
     this._handleDeleteClick(this._cardId, this._elementCard);
   }
 
-  _setLikesCount(count) {
-    this._cardLikeCount.textContent = count.toString();
+  setLikesCount(count) {
+    this._cardLikeCount.textContent = count;
   }
 
   _setEventListeners() {
@@ -77,15 +83,5 @@ export default class Card {
       this._handleCardClick();
     });
   }
-
-  // _removeEventListeners() {
-  //   this._cardTrashButton._removeEventListener(press, this._handleCardTrash);
-  // }
-
-  // removeCard() {
-  //   this._removeEventListeners();
-  //   this._elementCard.remove();
-  //   this._elementCard = null;
-  // }
 }
 
