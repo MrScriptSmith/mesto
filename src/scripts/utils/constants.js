@@ -67,11 +67,16 @@ const profileActivity = '.profile__activity';
 const profileAvatar = '.profile__avatar';
 const profileForm = document.forms['profile-form'];
 const cardForm = document.forms['card-form'];
+const avatarForm = document.forms['avatar-form'];
 const buttonAddPopup = document.querySelector('.profile__button-add');
 const closeButtons = document.querySelectorAll('.popup__close');
 const cardsContainer = document.querySelector('.places__cards');
 const selectorCardsContainer = '.places__cards';
 const pressOrMouseDown = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
+const buttonEditAvatarPopup = document.querySelector('.profile__avatar-container');
+const buttonSubmitPopupEdit = document.querySelector('#button-submit-popup-edit');
+const buttonSubmitPopupAdd = document.querySelector('#button-submit-popup-add');
+const buttonSubmitPopupAvatar = document.querySelector('#button-submit-popup-avatar');
 
 
 export {
@@ -96,5 +101,10 @@ export {
   cardsContainer,
   pressOrMouseDown,
   selectorCardsContainer,
-  serverConfig
+  serverConfig,
+  buttonEditAvatarPopup,
+  avatarForm,
+  buttonSubmitPopupAvatar,
+  buttonSubmitPopupAdd,
+  buttonSubmitPopupEdit
 };

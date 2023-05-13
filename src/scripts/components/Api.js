@@ -108,6 +108,22 @@ export default class Api {
     return jsonAnswer;
   }
 
+  async pushAvatar(data) {
+
+    const response = await fetch(`${this._generalUrl}${this._userUrl}/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._privateKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    });
+
+    const jsonAnswer = await this._checkResponse(response);
+    return jsonAnswer;
+  }
 
 }
 

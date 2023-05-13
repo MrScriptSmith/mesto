@@ -26,7 +26,11 @@
       <main class="content">
         <section class="profile">
           <div class="profile__info">
-            <img src="" alt="Аватар" class="profile__avatar" />
+            <div class="profile__avatar-container cursor-pointer">
+              <img src="" alt="Аватар" class="profile__avatar" />
+              <div class="profile__avatar-overlay"></div>
+            </div>
+
             <div class="profile__data">
               <h1 class="profile__name"></h1>
               <button
@@ -76,7 +80,7 @@
         <div class="popup__container">
           <button
             aria-label="Закрыть"
-            class="popup__close button-clickable cursor-pointer"
+            class="popup__close popup__close_type_basic button-clickable cursor-pointer"
             type="button"
             id="popup-edit-close"
           ></button>
@@ -111,7 +115,13 @@
             <span
               class="popup__input-text-error popup__input-text-error_type_useractivity"
             ></span>
-            <button type="submit" class="popup__submit">Сохранить</button>
+            <button
+              id="button-submit-popup-edit"
+              type="submit"
+              class="popup__submit"
+            >
+              Сохранить
+            </button>
           </form>
         </div>
       </div>
@@ -119,7 +129,7 @@
         <div class="popup__container">
           <button
             aria-label="Закрыть"
-            class="popup__close button-clickable cursor-pointer"
+            class="popup__close popup__close_type_basic button-clickable cursor-pointer"
             type="button"
             id="popup-add-close"
           ></button>
@@ -154,6 +164,7 @@
             ></span>
             <button
               disabled
+              id="button-submit-popup-add"
               type="submit"
               class="popup__submit popup__submit_inactive"
             >
@@ -173,26 +184,54 @@
           <h3 class="image-popup__title"></h3>
         </div>
       </div>
-
       <div class="popup" id="popup-delete">
         <div class="popup__container">
           <button
             aria-label="Закрыть"
-            class="popup__close popup__close-trash button-clickable cursor-pointer"
+            class="popup__close popup__close_type_trash button-clickable cursor-pointer"
             type="button"
-            id="popup-add-close"
+            id="popup-close"
           ></button>
           <h2 class="popup__name popup__name-trash">Вы уверены?</h2>
-          <button
-            type="button"
-            class="popup__submit"
-          >
-            Да
-          </button>
+          <button type="button" class="popup__submit">Да</button>
         </div>
       </div>
-
-
+      <div class="popup" id="popup-edit-avatar">
+        <div class="popup__container">
+          <button
+            aria-label="Закрыть"
+            class="popup__close popup__close_type_avatar button-clickable cursor-pointer"
+            type="button"
+            id="popup-close"
+          ></button>
+          <h2 class="popup__name">Обновить аватар</h2>
+          <form
+            name="avatar-form"
+            action="#"
+            class="popup__form"
+            id="avatar-form"
+          >
+            <input
+              name="avatar"
+              type="url"
+              placeholder="Ссылка на картинку"
+              class="popup__input popup__input_type_card-link"
+              required
+            />
+            <span
+              class="popup__input-text-error popup__input-text-error_type_avatar"
+            ></span>
+            <button
+              disabled
+              id="button-submit-popup-avatar"
+              type="submit"
+              class="popup__submit popup__submit_inactive"
+            >
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -20,8 +20,6 @@
 @media (max-width: 600px) {
   .popup__container {
     min-width: 282px;
-    -webkit-box-align: none;
-        -ms-flex-align: none;
-            align-items: none;
+    align-items: center;
   }
 }
