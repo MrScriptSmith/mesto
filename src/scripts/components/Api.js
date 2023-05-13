@@ -69,6 +69,19 @@ export default class Api {
     return jsonAnswer;
   }
 
+  async deleteCard(cardId) {
+    const response = await fetch(`${this._generalUrl}${this._cardUrl}/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._privateKey,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const jsonAnswer = await this._checkResponse(response);
+    return jsonAnswer;
+  }
+
 
 }
 

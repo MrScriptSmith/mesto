@@ -1,14 +1,16 @@
 import Popup from "./Popup.js";
 
 export default class PopupProofDelete extends Popup {
-  constructor(selectorPopup) {
+  constructor(selectorPopup, deleteCardCallback) {
     super(selectorPopup);
     this._handleDeleteProof = this._handleDeleteProof.bind(this);
+    this._deleteCardCallback = deleteCardCallback;
   }
 
-  open(deleteProofHandler) {
-    this._deleteProofHandler = deleteProofHandler;
+  open(cardId, cardElement) {
+    this._cardId = cardId;
     super.open();
+    this._cardElement = cardElement;
   }
 
   setDeleteProofHandler(handler) {
@@ -16,8 +18,8 @@ export default class PopupProofDelete extends Popup {
   }
 
   _handleDeleteProof() {
-    if (this._deleteProofHandler) {
-      this._deleteProofHandler();
+    if (this._cardId) {
+      this._deleteCardCallback(this._cardId, this._cardElement);
       this.close();
     }
   }
@@ -27,4 +29,3 @@ export default class PopupProofDelete extends Popup {
     this._popup.querySelector('.popup__submit').addEventListener('click', this._handleDeleteProof);
   }
 }
-

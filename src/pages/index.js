@@ -30,7 +30,13 @@ const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
 
 
 function createCard(cardObject, myUserId) {
-  const newCard = new Card(cardObject, '#cardTemplate', imagePopup, deletePopup, myUserId);
+  const newCard = new Card(
+    cardObject,
+    '#cardTemplate',
+    imagePopup,
+    myUserId,
+    (cardId, cardElement) => deletePopup.open(cardId, cardElement)
+    );
   return newCard.generateCard();
 }
 
@@ -49,13 +55,14 @@ async function getUserInfo() {
     userInfo.setUserInfo({
       name: dataProfile.name,
       activity: dataProfile.about,
-      avatar: dataProfile.avatar
+      avatar: dataProfile.avatar,
+      userId: dataProfile._id
     });
 
-    const myUserId = dataProfile._id;
+    // const myUserId = dataProfile._id;
 
     dataCards.forEach((cardData) => {
-      const card = createCard(cardData, myUserId);
+      const card = createCard(cardData, userInfo.getUserId());
       cardList.addItemToBottom(card);
     });
 
@@ -83,7 +90,7 @@ const editPopup = new PopupWithForm('#popup-edit', async (data) => {
 const addPopup = new PopupWithForm('#popup-add', async (cardObject) => {
   try {
     const addedCard = await api.pushCardInfo(cardObject);
-    const newCard = createCard(addedCard);
+    const newCard = createCard(addedCard, userInfo.getUserId());
     cardList.addItemToTop(newCard);
   } catch (error) {
     console.error(`Ошибка при обновлении информации о профиле: ${error}`);
@@ -92,7 +99,15 @@ const addPopup = new PopupWithForm('#popup-add', async (cardObject) => {
 });
 const imagePopup = new PopupWithImage('.image-popup');
 
-const deletePopup = new PopupProofDelete('#popup-delete');
+const deletePopup = new PopupProofDelete('#popup-delete', async (cardId, cardElement) => {
+  try {
+    await api.deleteCard(cardId);
+    cardElement.remove(); // удаление элемента после успешного ответа сервера
+    cardElement = null;
+  } catch (error) {
+    console.error(`Ошибка при обновлении информации о профиле: ${error}`);
+  }
+});
 
 const formValidators = {};
 

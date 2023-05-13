@@ -1,15 +1,17 @@
 import { press } from '../utils/constants.js';
 
 export default class Card {
-  constructor(card, setTemplateSelector, popupWithImage, popupProofDelete, myUserId) {
+  constructor(card, setTemplateSelector, popupWithImage, myUserId, handleDeleteClick) {
     this._setTemplateSelector = setTemplateSelector;
     this._name = card.name;
     this._link = card.link;
     this._popupWithImage = popupWithImage;
-    this._popupProofDelete = popupProofDelete;
+    this._handleDeleteClick = handleDeleteClick;
     this._likeCount = card.likes.length;
     this._ownerUserId = card.owner._id;
     this._myUserId = myUserId;
+    this._cardId = card._id;
+    // this._handleCardTrash = this._handleCardTrash.bind(this);
   }
 
   _getCardTemplate() {
@@ -54,10 +56,7 @@ export default class Card {
   }
 
   _handleCardTrash() {
-    this._popupProofDelete.open(() => {
-      this._elementCard.remove();
-      this._elementCard = null;
-    });
+    this._handleDeleteClick(this._cardId, this._elementCard);
   }
 
   _setLikesCount(count) {
@@ -78,5 +77,15 @@ export default class Card {
       this._handleCardClick();
     });
   }
+
+  // _removeEventListeners() {
+  //   this._cardTrashButton._removeEventListener(press, this._handleCardTrash);
+  // }
+
+  // removeCard() {
+  //   this._removeEventListeners();
+  //   this._elementCard.remove();
+  //   this._elementCard = null;
+  // }
 }
 
