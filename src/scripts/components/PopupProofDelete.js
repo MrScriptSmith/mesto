@@ -20,7 +20,6 @@ export default class PopupProofDelete extends Popup {
   _handleDeleteProof() {
     if (this._cardId) {
       this._deleteCardCallback(this._cardId, this._cardElement);
-      this.close();
     }
   }
 

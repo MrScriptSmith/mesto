@@ -49,9 +49,10 @@ const validationConfig = {
 
 const serverConfig = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-65',
-  key: '608096ab-91fa-4cd3-8368-f20c618391fd',
-  userUrl: '/users/me',
-  cardUrl: '/cards'
+  headers: {
+    authorization: '608096ab-91fa-4cd3-8368-f20c618391fd',
+    'Content-Type': 'application/json'
+  }
 };
 
 const forms = Array.from(document.forms);
@@ -74,9 +75,6 @@ const cardsContainer = document.querySelector('.places__cards');
 const selectorCardsContainer = '.places__cards';
 const pressOrMouseDown = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
 const buttonEditAvatarPopup = document.querySelector('.profile__avatar-container');
-const buttonSubmitPopupEdit = document.querySelector('#button-submit-popup-edit');
-const buttonSubmitPopupAdd = document.querySelector('#button-submit-popup-add');
-const buttonSubmitPopupAvatar = document.querySelector('#button-submit-popup-avatar');
 
 
 export {
@@ -103,8 +101,5 @@ export {
   selectorCardsContainer,
   serverConfig,
   buttonEditAvatarPopup,
-  avatarForm,
-  buttonSubmitPopupAvatar,
-  buttonSubmitPopupAdd,
-  buttonSubmitPopupEdit
+  avatarForm
 };

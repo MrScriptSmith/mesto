@@ -15,17 +15,21 @@ export default class UserInfo {
   }
 
   setUserInfo({ name, activity, avatar, userId }) {
-    this._userName.textContent = name;
-    this._userActivity.textContent = activity;
-    this._userAvatar.src = avatar;
-    this._userId = userId;
+    if (name !== undefined) {
+      this._userName.textContent = name;
+    }
+    if (activity !== undefined) {
+      this._userActivity.textContent = activity;
+    }
+    if (avatar !== undefined) {
+      this._userAvatar.src = avatar;
+    }
+    if (userId !== undefined) {
+      this._userId = userId;
+    }
   }
 
   getUserId() {
     return this._userId;
-  }
-
-  setUserAvatar(avatarUrl) {
-    this._userAvatar.src = avatarUrl;
   }
 }

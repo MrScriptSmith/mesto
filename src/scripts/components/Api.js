@@ -1,9 +1,7 @@
 export default class Api {
-  constructor({ url, key, userUrl, cardUrl }) {
+  constructor({ url, headers }) {
     this._generalUrl = url;
-    this._userUrl = userUrl;
-    this._privateKey = key;
-    this._cardUrl = cardUrl;
+    this._headers = headers;
   }
 
   _checkResponse(response) {
@@ -13,118 +11,62 @@ export default class Api {
     return response.json();
   }
 
-  async pullProfileInfo() {
-    const response = await fetch(`${this._generalUrl}${this._userUrl}`, {
-      headers: {
-        authorization: this._privateKey
-      }
-    });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
+  _request(endpoint, options) {
+    return fetch(`${this._generalUrl}${endpoint}`, { ...options, headers: this._headers }).then(this._checkResponse);
   }
 
-  async pullCardInfo() {
-    const response = await fetch(`${this._generalUrl}${this._cardUrl}`, {
-      headers: {
-        authorization: this._privateKey
-      }
-    });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
+  pullProfileInfo() {
+    return this._request(`/users/me`);
   }
 
-  async patchProfileInfo(data) {
-    const response = await fetch(`${this._generalUrl}${this._userUrl}`, {
+  pullCardInfo() {
+    return this._request(`/cards`);
+  }
+
+  patchProfileInfo(data) {
+    return this._request(`/users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._privateKey,
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({
         name: data.username,
         about: data.useractivity
       })
     });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
   }
 
-  async pushCardInfo(data) {
-    const response = await fetch(`${this._generalUrl}${this._cardUrl}`, {
+  pushCardInfo(data) {
+    return this._request(`/cards`, {
       method: 'POST',
-      headers: {
-        authorization: this._privateKey,
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({
         name: data.name,
         link: data.link
       })
     });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
   }
 
-  async deleteCard(cardId) {
-    const response = await fetch(`${this._generalUrl}${this._cardUrl}/${cardId}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._privateKey,
-        'Content-Type': 'application/json'
-      }
+  deleteCard(cardId) {
+    return this._request(`/cards/${cardId}`, {
+      method: 'DELETE'
     });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
   }
 
-  async likeCard(cardId) {
-    const response = await fetch(`${this._generalUrl}${this._cardUrl}/${cardId}/likes`, {
-      method: 'PUT',
-      headers: {
-        authorization: this._privateKey,
-        'Content-Type': 'application/json'
-      }
+  likeCard(cardId) {
+    return this._request(`/cards/${cardId}/likes`, {
+      method: 'PUT'
     });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
   }
 
-  async dislikeCard(cardId) {
-    const response = await fetch(`${this._generalUrl}${this._cardUrl}/${cardId}/likes`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._privateKey,
-        'Content-Type': 'application/json'
-      }
+  dislikeCard(cardId) {
+    return this._request(`/cards/${cardId}/likes`, {
+      method: 'DELETE'
     });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
   }
 
-  async pushAvatar(data) {
-
-    const response = await fetch(`${this._generalUrl}${this._userUrl}/avatar`, {
+  pushAvatar(data) {
+    return this._request(`/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._privateKey,
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({
         avatar: data.avatar
       })
     });
-
-    const jsonAnswer = await this._checkResponse(response);
-    return jsonAnswer;
   }
-
 }
-
-

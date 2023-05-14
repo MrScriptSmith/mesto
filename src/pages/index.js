@@ -13,10 +13,7 @@ import {
   selectorCardsContainer,
   serverConfig,
   buttonEditAvatarPopup,
-  avatarForm,
-  buttonSubmitPopupAvatar,
-  buttonSubmitPopupAdd,
-  buttonSubmitPopupEdit
+  avatarForm
 } from '../scripts/utils/constants.js';
 
 import Card from '../scripts/components/Card.js';
@@ -32,6 +29,19 @@ import Api from '../scripts/components/Api.js';
 const api = new Api(serverConfig);
 const userInfo = new UserInfo(profileName, profileActivity, profileAvatar);
 
+function handleSubmit(request, popupInstance, loadingText = "Сохранение...") {
+  popupInstance.renderLoading(true, loadingText);
+  request()
+    .then(() => {
+      popupInstance.close()
+    })
+    .catch((err) => {
+      console.error(`Ошибка в ${popupInstance}: ${err}`);
+    })
+    .finally(() => {
+      popupInstance.renderLoading(false);
+    });
+}
 
 
 function createCard(cardObject, myUserId) {
@@ -62,8 +72,8 @@ function createCard(cardObject, myUserId) {
 }
 
 const cardList = new Section({
-  renderer: (cardObject) => {
-    cardList.addItemToBottom(createCard(cardObject));
+  renderer: (cardObject, userId) => {
+    return createCard(cardObject, userId);
   }
 }, selectorCardsContainer);
 
@@ -80,10 +90,7 @@ async function getUserInfo() {
       userId: dataProfile._id
     });
 
-    dataCards.forEach((cardData) => {
-      const card = createCard(cardData, userInfo.getUserId());
-      cardList.addItemToBottom(card);
-    });
+    cardList.renderItems(dataCards, userInfo.getUserId());
 
   } catch (error) {
     console.error(`Ошибка при загрузке данных пользователя: ${error}`);
@@ -91,43 +98,25 @@ async function getUserInfo() {
 };
 getUserInfo();
 
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-const editPopup = new PopupWithForm('#popup-edit', async (data) => {
-  try {
-    buttonSubmitPopupEdit.textContent = 'Сохранение...';
+const editPopup = new PopupWithForm('#popup-edit', (data) => {
+  handleSubmit(async () => {
     const dataProfile = await api.patchProfileInfo(data);
     userInfo.setUserInfo({
       name: dataProfile.name,
       activity: dataProfile.about,
       avatar: dataProfile.avatar
     });
-    editPopup.close();
-  } catch (error) {
-    console.error(`Ошибка при обновлении информации о профиле: ${error}`);
-  } finally {
-    buttonSubmitPopupEdit.textContent = 'Сохранить';
-  }
+  }, editPopup, 'Сохранение...');
 });
 
-
-const addPopup = new PopupWithForm('#popup-add', async (cardObject) => {
-  try {
-    buttonSubmitPopupAdd.textContent = 'Создание...';
+const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
+  handleSubmit(async () => {
     const addedCard = await api.pushCardInfo(cardObject);
     const newCard = createCard(addedCard, userInfo.getUserId());
     cardList.addItemToTop(newCard);
-    addPopup.close();
-  } catch (error) {
-    console.error(`Ошибка при добавлении карточки: ${error}`);
-  } finally {
-    buttonSubmitPopupAdd.textContent = 'Создать';
-  }
-
+  }, addPopup, 'Создание...');
 });
+
 const imagePopup = new PopupWithImage('.image-popup');
 
 const deletePopup = new PopupProofDelete('#popup-delete', async (cardId, cardElement) => {
@@ -135,22 +124,18 @@ const deletePopup = new PopupProofDelete('#popup-delete', async (cardId, cardEle
     await api.deleteCard(cardId);
     cardElement.remove();
     cardElement = null;
+    deletePopup.close();
   } catch (error) {
     console.error(`Ошибка при удалении карточки: ${error}`);
   }
 });
 
-const avatarPopup = new PopupWithForm('#popup-edit-avatar', async (cardObject) => {
-  try {
-    buttonSubmitPopupAvatar.textContent = 'Сохранение...';
+
+const avatarPopup = new PopupWithForm('#popup-edit-avatar', (cardObject) => {
+  handleSubmit(async () => {
     const updateAvatar = await api.pushAvatar(cardObject);
-    userInfo.setUserAvatar(updateAvatar.avatar);
-    avatarPopup.close();
-  } catch (error) {
-    console.error(`Ошибка при обновлении аватара: ${error}`);
-  } finally {
-    buttonSubmitPopupAvatar.textContent = 'Сохранить';
-  }
+    userInfo.setUserInfo({ avatar: updateAvatar.avatar });
+  }, avatarPopup, 'Сохранение...');
 });
 
 const formValidators = {};
@@ -188,5 +173,4 @@ buttonAddPopup.addEventListener(press, () => {
 buttonEditAvatarPopup.addEventListener(press, () => {
   formValidators[ avatarForm.getAttribute('name') ].resetValidation();
   avatarPopup.open();
-
 })
