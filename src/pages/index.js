@@ -106,7 +106,7 @@ const editPopup = new PopupWithForm('#popup-edit', (data) => {
       activity: dataProfile.about,
       avatar: dataProfile.avatar
     });
-  }, editPopup, 'Сохранение...');
+  }, editPopup);
 });
 
 const addPopup = new PopupWithForm('#popup-add', (cardObject) => {
@@ -135,7 +135,7 @@ const avatarPopup = new PopupWithForm('#popup-edit-avatar', (cardObject) => {
   handleSubmit(async () => {
     const updateAvatar = await api.pushAvatar(cardObject);
     userInfo.setUserInfo({ avatar: updateAvatar.avatar });
-  }, avatarPopup, 'Сохранение...');
+  }, avatarPopup);
 });
 
 const formValidators = {};
